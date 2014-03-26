@@ -1,99 +1,268 @@
-match(true)(function() {
-    return applyNext();
-});
+var log = console.error.bind(console);
 
 match(!this.jsdocType)(function() {
-    console.log('⇢ ANY');
-
+    log('⇢ ANY');
     return '';
 });
 
 match(this.jsdocType === 'root')(function() {
-    console.log('⇢ root');
+    log('⇢ root');
 
-    return this.modules.map(function(it) { return apply(it) });
+    var res = '';
+
+    local({ depth : 0, _res : '' })(function() {
+        this.depth++;
+        this.modules.forEach(function(ctx) {
+            this._res += apply(ctx)
+        }, this);
+        this.depth--;
+
+        res = this._res;
+    });
+
+    return res;
 });
 
 match(this.jsdocType === 'module')(function() {
-    console.log('⇢ module');
+    log('⇢ module', '@depth', this.depth);
 
-    return [
-        apply({ block : 'headline', mods : { level : 1 }, content : this.name }),
-        (this.description? apply({ block : 'para', content : this.description }) : ''),
-        apply(this.exports)
-    ]
-    .join('');
+    var name = apply('signature'),
+        res = apply({ block : 'headline', mods : { level : this.depth }, content : name });
+
+    local({ depth : this.depth + 1, _res : '' })(function() {
+        this.description && (this._res += apply({ block : 'para', content : this.description }));
+
+        if(this.exports) {
+            this._res += apply({ block : 'para', content : 'Exports:' });
+            this._res += apply(this.exports)
+        }
+
+        res += this._res;
+    });
+
+    return res;
 });
 
 match(this.jsdocType === 'class')(function() {
-    console.log('⇢ class');
+    log('⇢ class', '@depth', this.depth);
 
-    // TODO:
+    var depth = this.depth,
+        name = apply('signature'),
+        res = apply({ block : 'headline', mods : { level : depth++ }, content : name });
+
+    this.description && (res += apply({ block : 'para', content : this.description }));
+
+    var cons = this.cons,
+        proto = this.proto,
+        members = this.members;
+
+    if(cons) {
+        local({ depth : depth, _res : '' })(function() {
+            var depth = this.depth,
+                consSign = local({ name : this.name })(apply('signature', cons));
+
+            this._res += apply({ block : 'headline', mods : { level : depth++ }, content : 'Constructor' });
+            this._res += apply({ block : 'headline', mods : { level : depth++ }, content : consSign });
+
+
+            if(cons.params) {
+                this._res += apply({ block : 'headline', mods : { level : depth }, content : 'Parameters:' });
+                this._res += cons.params.map(function(ctx) { return apply(ctx) }).join('') + '\n';
+            }
+
+            res += this._res;
+        });
+    }
+
+    local({ depth : depth++, _res : '' })(function() {
+        if(proto) {
+            this._res += apply({ block : 'headline', mods : { level : this.depth++ }, content : 'Methods:' });
+            this._res += apply(proto);
+            this.depth--;
+        };
+
+        if(members) {
+            this._res += apply({ block : 'headline', mods : { level : this.depth++ }, content : 'Properties:' });
+            this._res += apply(members);
+            this.depth--;
+        };
+
+        res += this._res;
+    });
+
+    return res;
 });
 
 match(this.jsdocType === 'type')(
     match(this.jsType)(function() {
-        return '';
+        console.log('⇢ type', this.jsType, '@depth', this.depth);
+
+        var res = '';
+
+        this.description &&
+            (res += apply({ block : 'para', content : this.description }));
+
+        this.jsValue &&
+            (res += apply({ block : 'para', content : 'Value: "' + this.jsValue + '"' }));
+
+        return res;
     }),
     match(this.jsType === 'Object')(function() {
-        console.log('⇢ type Object');
+        console.log('⇢ type Object', '@depth', this.depth);
 
-        return '{\n\n' + this.props.map(function(it) {
-            var headline = it.key,
-                val = it.val;
+        var res = '';
 
-            val.jsType === 'Function' &&
-                (headline += ' ' + apply('signature', val));
+        this.props.forEach(function(ctx) {
+            var val = ctx.val,
+                valJsdocType = val.jsdocType;
 
-            return [
-                apply({ block : 'headline', mods : { level : 2 }, content : headline }),
-                apply(val)
-            ].join('')
-        }).join('') + '}';
+            if(valJsdocType === 'class') {
+                res += apply(val);
+                return;
+            }
+
+            var propName = local({ name : ctx.key })(apply('signature', val));
+            res += apply({ block : 'headline', mods : { level : this.depth }, content : propName });
+
+            this.depth++;
+            res += apply(val);
+            this.depth--;
+        }, this);
+
+        return res;
     }),
-    match(this.jsType === 'Function')(
-        match(true)(function() {
-            console.log('⇢ type Function');
+    match(this.jsType === 'Function')(function() {
+        console.log('⇢ type Function', '@depth', this.depth);
 
-            return [
-                this.description? apply({ block : 'para', content : this.description }) : '',
-                
-            ].join('');
-        }),
-        match(this._mode === 'signature')(function() {
-            console.log('⇢ type Function (signature)');
+        var res = '';
+        this.description && (res += apply({ block : 'para', content : this.description }));
 
-            return '( ' +
-                (this.params? this.params.map(function(it) { return apply(it) }).join(', ') : '') +
-                ' )' +
-                (this.returns? ' → ' + apply(this.returns) : '')
-        })
-    )
+        var depth = this.depth,
+            params = this.params,
+            returns = this.returns;
+
+        if(params) {
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Parameters:' });
+            res += params.map(function(ctx) { return apply(ctx) }).join('') + '\n';
+        }
+
+        if(returns) {
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Returns:' });
+            res += apply(returns);
+        }
+
+        return res;
+    })
 );
 
-match(this.jsdocType === 'param')(function() {
-    console.log('⇢ param');
+match(this.jsdocType === 'param')(
+    match(this.jsType)(function() {
+        var name = apply('jstype-name'),
+            type = apply('jstype-type');
+        return name + ' ' + type;
+    }),
+//    match(this.jsType === 'Function')(function() {
+//        // TODO: proper function's signature, e.g. `Function(filePath)`
+//        return local({ name : undefined })(apply('signature'));
+//    }),
+    function() {
+        log('⇢ param', this.jsType, '@depth', this.depth);
 
-    var res = this.name;
-    this.isOptional && (res = '[' + res + ']');
-    this.jsType && (res = '{' + this.jsType + '} ' + res);
+        var res = applyNext();
+        this.description && (res += '<br/>\n  ' + this.description);
+
+        return apply({ block : 'ulist', content : res });
+    }
+);
+
+match(this.jsdocType === 'returns')(function() {
+    log('⇢ returns', '@depth', this.depth);
+
+    var jsType = this.jsType,
+        res = apply({ block : 'para', content : Array.isArray(jsType)? jsType.join(' | ') : jsType });
+
+    this.description &&
+        (res += apply({ block : 'para', content : this.description }));
+
     return res;
 });
 
-match(this.jsdocType === 'returns')(function() {
-    console.log('⇢ returns');
+// ---
+
+match(this._mode === 'signature')(
+    match(this.jsdocType === 'module')(function() {
+        return this.name + ' Module';
+    }),
+    match(this.jsdocType === 'class')(function() {
+        return this.name + ' Class';
+    }),
+    match(this.jsdocType === 'param')(function() {
+        return apply('jstype-name');
+    }),
+    match(this.jsdocType === 'returns')(function() {
+        return apply('jstype-type');
+    }),
+    match(this.jsdocType === 'type')(
+        match(this.jsType)(function() {
+            return apply('jstype-name') + ' ' + apply('jstype-type');
+        }),
+        match(this.jsType === 'Function')(function() {
+            var res = (this.name || '') + ' (';
+
+            Array.isArray(this.params) &&
+                (res += ' ' + this.params.map(function(ctx) { return apply('signature', ctx) }).join(', ') + ' ');
+
+            res += ')';
+
+            this.returns && (res += ' → ' + local({ name : undefined })(apply('signature', this.returns)));
+
+            return res;
+        })
+    ),
+    function() {
+        log('⇢', this.jsdocType, '(signature)', '@depth', this.depth);
+        return applyNext();
+    }
+);
+
+match(this._mode === 'jstype')(function() {
+    log('⇢ (jstype)');
+
+    return apply('jstype-type') + ' ' + apply('jstype-name');
+});
+
+match(this._mode === 'jstype-name')(function() {
+    log('⇢ (jstype / name)');
+
+    if(!this.name) return '';
+
+    var res = this.name;
+
+    this.default && (res = res + '=' + this.default);
+    this.isOptional && (res = '[' + res + ']');
+
+    return res;
+});
+
+match(this._mode === 'jstype-type')(function() {
+    log('⇢ (jstype / type)');
 
     var jsType = this.jsType;
-    return '{' + (Array.isArray(jsType)? jsType.join(' | ') : jsType) + '}';
+    return jsType?
+        '{' + (Array.isArray(jsType)? jsType.join(' | ') : jsType) + '}' :
+        '';
 });
 
 // ---
 
 block('headline')(
+    function() { return '**' + this.content + '**\n\n' },
     mod('level', 1)(function() { return '# ' + this.content + '\n\n' }),
     mod('level', 2)(function() { return '## ' + this.content + '\n\n' }),
     mod('level', 3)(function() { return '### ' + this.content + '\n\n' }),
-    mod('level', 4)(function() { return '#### ' + this.content + '\n\n' })
+    mod('level', 4)(function() { return '#### ' + this.content + '\n\n' }),
+    mod('level', 5)(function() { return '##### ' + this.content + '\n\n' }),
+    mod('level', 6)(function() { return '###### ' + this.content + '\n\n' })
 );
 
 block('para')(function() { return this.content + '\n\n' });
@@ -102,4 +271,16 @@ block('link')(function() {
     var res = this.url;
     this.content && (res = '[' + this.content + '](' + res + ')');
     return res;
+});
+
+block('ulist')(function() {
+    return '* ' + this.content + '\n';
+});
+
+block('olist')(function() {
+    return '1. ' + this.content + '\n';
+});
+
+block('code')(function() {
+    return '`' + this.content + '`';
 });

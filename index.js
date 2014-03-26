@@ -7,7 +7,7 @@ var fs = require('fs'),
     FIXTURES_DIR = path.resolve(TESTS_DIR, 'fixtures');
 
 fs.readdirSync(FIXTURES_DIR).forEach(function(file) {
-    if(file !== 'objects.jsdoc.json') return;
+    if(file !== 'identify.jsdoc.json') return;
 
     var jsdocPath = path.join(FIXTURES_DIR, file);
     if(!fs.statSync(jsdocPath).isFile() || file.indexOf('.jsdoc.json') === -1) return;
