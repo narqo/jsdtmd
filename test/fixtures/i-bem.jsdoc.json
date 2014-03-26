@@ -1,0 +1,1851 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "i-bem",
+      "exports": {
+        "jsdocType": "class",
+        "name": "BEM",
+        "static": {
+          "jsdocType": "type",
+          "jsType": "Object",
+          "props": [
+            {
+              "key": "blocks",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "description": "Storage for block declarations (hash by block name)"
+              }
+            },
+            {
+              "key": "decl",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "decl",
+                    "description": "Block name (simple syntax) or description",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "decl.block|decl.name",
+                    "description": "Block name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "decl.baseBlock",
+                    "description": "Name of the parent block",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "decl.baseMix",
+                    "description": "Mixed block names",
+                    "jsType": "Array",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "decl.modName",
+                    "description": "Modifier name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "decl.modVal",
+                    "description": "Modifier value",
+                    "jsType": [
+                      "String",
+                      "Array"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "props",
+                    "description": "Methods",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "staticProps",
+                    "description": "Static methods",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "Function"
+                },
+                "description": "Declares blocks and creates a block class"
+              }
+            },
+            {
+              "key": "_processLive",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "heedLive",
+                    "description": "Whether to take into account that the block already processed its live properties",
+                    "jsType": "Boolean",
+                    "isOptional": true,
+                    "default": "false"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Whether the block is a live block",
+                  "jsType": "Boolean"
+                },
+                "description": "Processes a block's live properties"
+              }
+            },
+            {
+              "key": "create",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "block",
+                    "description": "Block name or description",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "params",
+                    "description": "Block parameters",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "BEM"
+                },
+                "description": "Factory method for creating an instance of the block named"
+              }
+            },
+            {
+              "key": "getName",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "String"
+                },
+                "description": "Returns the name of the current block"
+              }
+            },
+            {
+              "key": "on",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event type",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "data",
+                    "description": "Additional data that the handler gets as e.data",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler",
+                    "jsType": "Function"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Handler context",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Adds an event handler"
+              }
+            },
+            {
+              "key": "un",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event type",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler",
+                    "jsType": "Function",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Handler context",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Removes event handler or handlers"
+              }
+            },
+            {
+              "key": "_extractElemNameFrom",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": [
+                    "String",
+                    "undefined"
+                  ]
+                },
+                "description": "Retrieves the name of an element nested in a block"
+              }
+            },
+            {
+              "key": "_runInitFns",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "description": "Executes the block init functions"
+              }
+            }
+          ]
+        },
+        "proto": {
+          "jsdocType": "type",
+          "jsType": "Object",
+          "props": [
+            {
+              "key": "_init",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "description": "Initializes the block"
+              }
+            },
+            {
+              "key": "on",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event type",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "data",
+                    "description": "Additional data that the handler gets as e.data",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler",
+                    "jsType": "Function"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Handler context",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Adds an event handler"
+              }
+            },
+            {
+              "key": "un",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event type",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler",
+                    "jsType": "Function",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Handler context",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Removes event handler or handlers"
+              }
+            },
+            {
+              "key": "emit",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "data",
+                    "description": "Additional information",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Executes the block's event handlers and live event handlers"
+              }
+            },
+            {
+              "key": "_buildEvent",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "",
+                    "jsType": [
+                      "String",
+                      "events:Event"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "events:Event"
+                },
+                "description": "Builds event"
+              }
+            },
+            {
+              "key": "hasMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "Boolean"
+                },
+                "description": "Checks whether a block or nested element has a modifier"
+              }
+            },
+            {
+              "key": "getMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Modifier value",
+                  "jsType": "String"
+                },
+                "description": "Returns the value of the modifier of the block/nested element"
+              }
+            },
+            {
+              "key": "_getElemMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elemName",
+                    "description": "Nested element name",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Modifier value",
+                  "jsType": "String"
+                },
+                "description": "Returns the value of the modifier of the nested element"
+              }
+            },
+            {
+              "key": "getMods",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "...modNames",
+                    "description": "Modifier names",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Hash of modifier values",
+                  "jsType": "Object"
+                },
+                "description": "Returns values of modifiers of the block/nested element"
+              }
+            },
+            {
+              "key": "setMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Sets the modifier for a block/nested element"
+              }
+            },
+            {
+              "key": "_onSetMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "oldModVal",
+                    "description": "Old modifier value",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elemName",
+                    "description": "Element name",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Function after successfully changing the modifier of the block/nested element"
+              }
+            },
+            {
+              "key": "toggleMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal1",
+                    "description": "First modifier value",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal2",
+                    "description": "Second modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "condition",
+                    "description": "Condition",
+                    "jsType": "Boolean",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Sets a modifier for a block/nested element, depending on conditions.\nIf the condition parameter is passed: when true, modVal1 is set; when false, modVal2 is set.\nIf the condition parameter is not passed: modVal1 is set if modVal2 was set, or vice versa."
+              }
+            },
+            {
+              "key": "delMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Removes a modifier from a block/nested element"
+              }
+            },
+            {
+              "key": "_callModFn",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "prefix",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elemName",
+                    "description": "Element name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modFnParams",
+                    "description": "Handler parameters",
+                    "jsType": "Array"
+                  }
+                ],
+                "description": "Executes handlers for setting modifiers"
+              }
+            },
+            {
+              "key": "_extractModVal",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Modifier value",
+                  "jsType": "String"
+                },
+                "description": "Retrieves the value of the modifier"
+              }
+            },
+            {
+              "key": "_extractMods",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modNames",
+                    "description": "Names of modifiers",
+                    "jsType": "Array"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Hash of modifier values by name",
+                  "jsType": "Object"
+                },
+                "description": "Retrieves name/value for a list of modifiers"
+              }
+            },
+            {
+              "key": "getDefaultParams",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "Object"
+                },
+                "description": "Returns a block's default parameters"
+              }
+            },
+            {
+              "key": "_destruct",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "description": "Deletes a block"
+              }
+            },
+            {
+              "key": "nextTick",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "callback",
+                    "jsType": "Function"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Executes given callback on next turn eventloop in block's context"
+              }
+            }
+          ]
+        },
+        "members": {
+          "jsdocType": "type",
+          "jsType": "Object",
+          "props": [
+            {
+              "key": "_modCache",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "accessLevel": "private",
+                "description": "Cache of block modifiers"
+              }
+            },
+            {
+              "key": "_processingMods",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "accessLevel": "private",
+                "description": "Current modifiers in the stack"
+              }
+            },
+            {
+              "key": "params",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "isReadOnly": true,
+                "description": "Block parameters, taking into account the defaults"
+              }
+            }
+          ]
+        },
+        "augments": {
+          "jsdocType": "type",
+          "jsType": "events:Emitter"
+        },
+        "description": "Base block for creating BEM blocks",
+        "cons": {
+          "jsdocType": "type",
+          "jsType": "Function",
+          "accessLevel": "private",
+          "params": [
+            {
+              "jsdocType": "param",
+              "name": "mods",
+              "description": "Block modifiers",
+              "jsType": "Object"
+            },
+            {
+              "jsdocType": "param",
+              "name": "params",
+              "description": "Block parameters",
+              "jsType": "Object"
+            },
+            {
+              "jsdocType": "param",
+              "name": "initImmediately",
+              "description": "",
+              "jsType": "Boolean",
+              "isOptional": true,
+              "default": "true"
+            }
+          ]
+        }
+      },
+      "classes": {
+        "BEM": {
+          "jsdocType": "class",
+          "name": "BEM",
+          "static": {
+            "jsdocType": "type",
+            "jsType": "Object",
+            "props": [
+              {
+                "key": "blocks",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Object",
+                  "description": "Storage for block declarations (hash by block name)"
+                }
+              },
+              {
+                "key": "decl",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "decl",
+                      "description": "Block name (simple syntax) or description",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "decl.block|decl.name",
+                      "description": "Block name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "decl.baseBlock",
+                      "description": "Name of the parent block",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "decl.baseMix",
+                      "description": "Mixed block names",
+                      "jsType": "Array",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "decl.modName",
+                      "description": "Modifier name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "decl.modVal",
+                      "description": "Modifier value",
+                      "jsType": [
+                        "String",
+                        "Array"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "props",
+                      "description": "Methods",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "staticProps",
+                      "description": "Static methods",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "Function"
+                  },
+                  "description": "Declares blocks and creates a block class"
+                }
+              },
+              {
+                "key": "_processLive",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "heedLive",
+                      "description": "Whether to take into account that the block already processed its live properties",
+                      "jsType": "Boolean",
+                      "isOptional": true,
+                      "default": "false"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Whether the block is a live block",
+                    "jsType": "Boolean"
+                  },
+                  "description": "Processes a block's live properties"
+                }
+              },
+              {
+                "key": "create",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "block",
+                      "description": "Block name or description",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "params",
+                      "description": "Block parameters",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "BEM"
+                  },
+                  "description": "Factory method for creating an instance of the block named"
+                }
+              },
+              {
+                "key": "getName",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  "description": "Returns the name of the current block"
+                }
+              },
+              {
+                "key": "on",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event type",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "data",
+                      "description": "Additional data that the handler gets as e.data",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler",
+                      "jsType": "Function"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Handler context",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Adds an event handler"
+                }
+              },
+              {
+                "key": "un",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event type",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler",
+                      "jsType": "Function",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Handler context",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Removes event handler or handlers"
+                }
+              },
+              {
+                "key": "_extractElemNameFrom",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": [
+                      "String",
+                      "undefined"
+                    ]
+                  },
+                  "description": "Retrieves the name of an element nested in a block"
+                }
+              },
+              {
+                "key": "_runInitFns",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "description": "Executes the block init functions"
+                }
+              }
+            ]
+          },
+          "proto": {
+            "jsdocType": "type",
+            "jsType": "Object",
+            "props": [
+              {
+                "key": "_init",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "description": "Initializes the block"
+                }
+              },
+              {
+                "key": "on",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event type",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "data",
+                      "description": "Additional data that the handler gets as e.data",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler",
+                      "jsType": "Function"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Handler context",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Adds an event handler"
+                }
+              },
+              {
+                "key": "un",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event type",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler",
+                      "jsType": "Function",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Handler context",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Removes event handler or handlers"
+                }
+              },
+              {
+                "key": "emit",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "data",
+                      "description": "Additional information",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Executes the block's event handlers and live event handlers"
+                }
+              },
+              {
+                "key": "_buildEvent",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "",
+                      "jsType": [
+                        "String",
+                        "events:Event"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "events:Event"
+                  },
+                  "description": "Builds event"
+                }
+              },
+              {
+                "key": "hasMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "Boolean"
+                  },
+                  "description": "Checks whether a block or nested element has a modifier"
+                }
+              },
+              {
+                "key": "getMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  },
+                  "description": "Returns the value of the modifier of the block/nested element"
+                }
+              },
+              {
+                "key": "_getElemMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elemName",
+                      "description": "Nested element name",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  },
+                  "description": "Returns the value of the modifier of the nested element"
+                }
+              },
+              {
+                "key": "getMods",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "...modNames",
+                      "description": "Modifier names",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Hash of modifier values",
+                    "jsType": "Object"
+                  },
+                  "description": "Returns values of modifiers of the block/nested element"
+                }
+              },
+              {
+                "key": "setMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Sets the modifier for a block/nested element"
+                }
+              },
+              {
+                "key": "_onSetMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "oldModVal",
+                      "description": "Old modifier value",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elemName",
+                      "description": "Element name",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Function after successfully changing the modifier of the block/nested element"
+                }
+              },
+              {
+                "key": "toggleMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal1",
+                      "description": "First modifier value",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal2",
+                      "description": "Second modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "condition",
+                      "description": "Condition",
+                      "jsType": "Boolean",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Sets a modifier for a block/nested element, depending on conditions.\nIf the condition parameter is passed: when true, modVal1 is set; when false, modVal2 is set.\nIf the condition parameter is not passed: modVal1 is set if modVal2 was set, or vice versa."
+                }
+              },
+              {
+                "key": "delMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Removes a modifier from a block/nested element"
+                }
+              },
+              {
+                "key": "_callModFn",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "prefix",
+                      "description": "",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elemName",
+                      "description": "Element name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modFnParams",
+                      "description": "Handler parameters",
+                      "jsType": "Array"
+                    }
+                  ],
+                  "description": "Executes handlers for setting modifiers"
+                }
+              },
+              {
+                "key": "_extractModVal",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  },
+                  "description": "Retrieves the value of the modifier"
+                }
+              },
+              {
+                "key": "_extractMods",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modNames",
+                      "description": "Names of modifiers",
+                      "jsType": "Array"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Hash of modifier values by name",
+                    "jsType": "Object"
+                  },
+                  "description": "Retrieves name/value for a list of modifiers"
+                }
+              },
+              {
+                "key": "getDefaultParams",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "Object"
+                  },
+                  "description": "Returns a block's default parameters"
+                }
+              },
+              {
+                "key": "_destruct",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "description": "Deletes a block"
+                }
+              },
+              {
+                "key": "nextTick",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "callback",
+                      "jsType": "Function"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Executes given callback on next turn eventloop in block's context"
+                }
+              }
+            ]
+          },
+          "members": {
+            "jsdocType": "type",
+            "jsType": "Object",
+            "props": [
+              {
+                "key": "_modCache",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Object",
+                  "accessLevel": "private",
+                  "description": "Cache of block modifiers"
+                }
+              },
+              {
+                "key": "_processingMods",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Object",
+                  "accessLevel": "private",
+                  "description": "Current modifiers in the stack"
+                }
+              },
+              {
+                "key": "params",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Object",
+                  "isReadOnly": true,
+                  "description": "Block parameters, taking into account the defaults"
+                }
+              }
+            ]
+          },
+          "augments": {
+            "jsdocType": "type",
+            "jsType": "events:Emitter"
+          },
+          "description": "Base block for creating BEM blocks",
+          "cons": {
+            "jsdocType": "type",
+            "jsType": "Function",
+            "accessLevel": "private",
+            "params": [
+              {
+                "jsdocType": "param",
+                "name": "mods",
+                "description": "Block modifiers",
+                "jsType": "Object"
+              },
+              {
+                "jsdocType": "param",
+                "name": "params",
+                "description": "Block parameters",
+                "jsType": "Object"
+              },
+              {
+                "jsdocType": "param",
+                "name": "initImmediately",
+                "description": "",
+                "jsType": "Boolean",
+                "isOptional": true,
+                "default": "true"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

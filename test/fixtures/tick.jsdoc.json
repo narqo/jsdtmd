@@ -1,0 +1,50 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "tick",
+      "description": "Helpers for polling anything",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Tick"
+      },
+      "classes": {
+        "Tick": {
+          "jsdocType": "class",
+          "name": "Tick",
+          "proto": {
+            "jsdocType": "type",
+            "jsType": "Object",
+            "props": [
+              {
+                "key": "start",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "description": "Starts polling"
+                }
+              },
+              {
+                "key": "stop",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "description": "Stops polling"
+                }
+              }
+            ]
+          },
+          "augments": {
+            "jsdocType": "type",
+            "jsType": "events:Emitter"
+          },
+          "cons": {
+            "jsdocType": "type",
+            "jsType": "Function"
+          }
+        }
+      }
+    }
+  ]
+}

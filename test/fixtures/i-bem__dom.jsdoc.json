@@ -1,0 +1,3821 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "i-bem__dom",
+      "exports": {
+        "jsdocType": "class",
+        "name": "BEMDOM",
+        "static": {
+          "jsdocType": "type",
+          "jsType": "Object",
+          "props": [
+            {
+              "key": "scope",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "jQuery",
+                "jsValue": null,
+                "description": "Scope, will be set on onDomReady to `<body>`"
+              }
+            },
+            {
+              "key": "doc",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "jQuery",
+                "description": "Document shortcut"
+              }
+            },
+            {
+              "key": "win",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "jQuery",
+                "description": "Window shortcut"
+              }
+            },
+            {
+              "key": "_processLive",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "heedLive",
+                    "description": "Whether to take into account that the block already processed its live properties",
+                    "jsType": "Boolean",
+                    "isOptional": true,
+                    "default": "false"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Whether the block is a live block",
+                  "jsType": "Boolean"
+                },
+                "description": "Processes a block's live properties"
+              }
+            },
+            {
+              "key": "init",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Root DOM node",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ],
+                    "isOptional": true,
+                    "default": "scope"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "ctx Initialization context",
+                  "jsType": "jQuery"
+                },
+                "description": "Initializes blocks on a fragment of the DOM tree"
+              }
+            },
+            {
+              "key": "destruct",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Root DOM node",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "excludeSelf",
+                    "description": "Exclude the main domElem",
+                    "jsType": "Boolean",
+                    "isOptional": true,
+                    "default": "false"
+                  }
+                ],
+                "description": "Destroys blocks on a fragment of the DOM tree"
+              }
+            },
+            {
+              "key": "update",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Root DOM node",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "content",
+                    "description": "New content",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Updated root DOM node",
+                  "jsType": "jQuery"
+                },
+                "description": "Replaces a fragment of the DOM tree inside the context, destroying old blocks and intializing new ones"
+              }
+            },
+            {
+              "key": "replace",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Root DOM node",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "content",
+                    "description": "Content to be added",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "New content",
+                  "jsType": "jQuery"
+                },
+                "description": "Changes a fragment of the DOM tree including the context and initializes blocks."
+              }
+            },
+            {
+              "key": "append",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Root DOM node",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "content",
+                    "description": "Content to be added",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "New content",
+                  "jsType": "jQuery"
+                },
+                "description": "Adds a fragment of the DOM tree at the end of the context and initializes blocks"
+              }
+            },
+            {
+              "key": "prepend",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Root DOM node",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "content",
+                    "description": "Content to be added",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "New content",
+                  "jsType": "jQuery"
+                },
+                "description": "Adds a fragment of the DOM tree at the beginning of the context and initializes blocks"
+              }
+            },
+            {
+              "key": "before",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Contextual DOM node",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "content",
+                    "description": "Content to be added",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "New content",
+                  "jsType": "jQuery"
+                },
+                "description": "Adds a fragment of the DOM tree before the context and initializes blocks"
+              }
+            },
+            {
+              "key": "after",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Contextual DOM node",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "content",
+                    "description": "Content to be added",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "New content",
+                  "jsType": "jQuery"
+                },
+                "description": "Adds a fragment of the DOM tree after the context and initializes blocks"
+              }
+            },
+            {
+              "key": "_buildCtxEventName",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event name",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "String"
+                },
+                "description": "Builds a full name for a live event"
+              }
+            },
+            {
+              "key": "liveInitOnEvent",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elemName",
+                    "description": "Element name or names (separated by spaces)",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "callback",
+                    "description": "Handler to call after successful initialization",
+                    "jsType": "Function",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Helper for live initialization for an event on DOM elements of a block or its elements"
+              }
+            },
+            {
+              "key": "liveBindTo",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "to",
+                    "description": "Description (object with modName, modVal, elem) or name of the element or elements (space-separated)",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "callback",
+                    "description": "Handler",
+                    "jsType": "Function",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Helper for subscribing to live events on DOM elements of a block or its elements"
+              }
+            },
+            {
+              "key": "liveUnbindFrom",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Name of the element or elements (space-separated)",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "callback",
+                    "description": "Handler",
+                    "jsType": "Function",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Helper for unsubscribing from live events on DOM elements of a block or its elements"
+              }
+            },
+            {
+              "key": "_liveInitOnBlockEvent",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "blockName",
+                    "description": "Name of the block that should trigger a reaction when initialized",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "callback",
+                    "description": "Handler to be called after successful initialization in the new block's context",
+                    "jsType": "Function"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "findFnName",
+                    "description": "Name of the method for searching",
+                    "jsType": "String"
+                  }
+                ],
+                "description": "Helper for live initialization when a different block is initialized"
+              }
+            },
+            {
+              "key": "liveInitOnBlockEvent",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "blockName",
+                    "description": "Name of the block that should trigger a reaction when initialized",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "callback",
+                    "description": "Handler to be called after successful initialization in the new block's context",
+                    "jsType": "Function"
+                  }
+                ],
+                "description": "Helper for live initialization for a different block's event on the current block's DOM element"
+              }
+            },
+            {
+              "key": "liveInitOnBlockInsideEvent",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "blockName",
+                    "description": "Name of the block that should trigger a reaction when initialized",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "callback",
+                    "description": "Handler to be called after successful initialization in the new block's context",
+                    "jsType": "Function",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Helper for live initialization for a different block's event inside the current block"
+              }
+            },
+            {
+              "key": "on",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "The element in which the event will be listened for",
+                    "jsType": "jQuery",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "data",
+                    "description": "Additional information that the handler gets as e.data",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler",
+                    "jsType": "Function"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fnCtx",
+                    "description": "Handler's context",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Adds a live event handler to a block, based on a specified element where the event will be listened for"
+              }
+            },
+            {
+              "key": "un",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "The element in which the event was being listened for",
+                    "jsType": "jQuery",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler",
+                    "jsType": "Function",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fnCtx",
+                    "description": "Handler context",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Removes the live event handler from a block, based on a specified element where the event was being listened for"
+              }
+            },
+            {
+              "key": "_liveCtxBind",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "The element in which the event will be listened for",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "data",
+                    "description": "Additional information that the handler gets as e.data",
+                    "jsType": "Object",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler",
+                    "jsType": "Function"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fnCtx",
+                    "description": "Handler context",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Adds a live event handler to a block, based on a specified element where the event will be listened for"
+              }
+            },
+            {
+              "key": "_liveCtxUnbind",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "The element in which the event was being listened for",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "e",
+                    "description": "Event name",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler",
+                    "jsType": "Function",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fnCtx",
+                    "description": "Handler context",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Removes a live event handler from a block, based on a specified element where the event was being listened for"
+              }
+            },
+            {
+              "key": "_extractElemNameFrom",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "jQuery"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": [
+                    "String",
+                    "undef"
+                  ]
+                },
+                "description": "Retrieves the name of an element nested in a block"
+              }
+            },
+            {
+              "key": "_buildModClassPrefix",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ],
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "String"
+                },
+                "description": "Builds a prefix for the CSS class of a DOM element or nested element of the block, based on modifier name"
+              }
+            },
+            {
+              "key": "_buildModValRE",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "quantifiers",
+                    "description": "Regular expression quantifiers",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "RegExp"
+                },
+                "description": "Builds a regular expression for extracting modifier values from a DOM element or nested element of a block"
+              }
+            },
+            {
+              "key": "_buildElemNameRE",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "RegExp"
+                },
+                "description": "Builds a regular expression for extracting names of elements nested in a block"
+              }
+            },
+            {
+              "key": "buildClass",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "String"
+                },
+                "description": "Builds a CSS class corresponding to the block/element and modifier"
+              }
+            },
+            {
+              "key": "buildSelector",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "String"
+                },
+                "description": "Builds a CSS selector corresponding to the block/element and modifier"
+              }
+            }
+          ]
+        },
+        "proto": {
+          "jsdocType": "type",
+          "jsType": "Object",
+          "props": [
+            {
+              "key": "findBlocksInside",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Block element",
+                    "jsType": [
+                      "String",
+                      "jQuery"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "block",
+                    "description": "Name or description (block,modName,modVal) of the block to find",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "BEMDOM"
+                },
+                "description": "Finds blocks inside the current block or its elements (including context)"
+              }
+            },
+            {
+              "key": "findBlockInside",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Block element",
+                    "jsType": [
+                      "String",
+                      "jQuery"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "block",
+                    "description": "Name or description (block,modName,modVal) of the block to find",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "BEMDOM"
+                },
+                "description": "Finds the first block inside the current block or its elements (including context)"
+              }
+            },
+            {
+              "key": "findBlocksOutside",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Block element",
+                    "jsType": [
+                      "String",
+                      "jQuery"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "block",
+                    "description": "Name or description (block,modName,modVal) of the block to find",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "BEMDOM"
+                },
+                "description": "Finds blocks outside the current block or its elements (including context)"
+              }
+            },
+            {
+              "key": "findBlockOutside",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Block element",
+                    "jsType": [
+                      "String",
+                      "jQuery"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "block",
+                    "description": "Name or description (block,modName,modVal) of the block to find",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "BEMDOM"
+                },
+                "description": "Finds the first block outside the current block or its elements (including context)"
+              }
+            },
+            {
+              "key": "findBlocksOn",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Block element",
+                    "jsType": [
+                      "String",
+                      "jQuery"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "block",
+                    "description": "Name or description (block,modName,modVal) of the block to find",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "BEMDOM"
+                },
+                "description": "Finds blocks on DOM elements of the current block or its elements"
+              }
+            },
+            {
+              "key": "findBlockOn",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Block element",
+                    "jsType": [
+                      "String",
+                      "jQuery"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "block",
+                    "description": "Name or description (block,modName,modVal) of the block to find",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "BEMDOM"
+                },
+                "description": "Finds the first block on DOM elements of the current block or its elements"
+              }
+            },
+            {
+              "key": "bindToDomElem",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "domElem",
+                    "description": "DOM element where the event will be listened for",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name or event object",
+                    "jsType": [
+                      "String",
+                      "Object"
+                    ]
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler function, which will be executed in the block's context",
+                    "jsType": "Function"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Adds an event handler for any DOM element"
+              }
+            },
+            {
+              "key": "bindToDoc",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler function, which will be executed in the block's context",
+                    "jsType": "Function"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Adds an event handler to the document"
+              }
+            },
+            {
+              "key": "bindToWin",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler function, which will be executed in the block's context",
+                    "jsType": "Function"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Adds an event handler to the window"
+              }
+            },
+            {
+              "key": "bindTo",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler function, which will be executed in the block's context",
+                    "jsType": "Function"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Adds an event handler to the block's main DOM elements or its nested elements"
+              }
+            },
+            {
+              "key": "unbindFromDomElem",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "domElem",
+                    "description": "DOM element where the event was being listened for",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler function",
+                    "jsType": "Function",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Removes event handlers from any DOM element"
+              }
+            },
+            {
+              "key": "unbindFromDoc",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler function",
+                    "jsType": "Function",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Removes event handler from document"
+              }
+            },
+            {
+              "key": "unbindFromWin",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler function",
+                    "jsType": "Function",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Removes event handler from window"
+              }
+            },
+            {
+              "key": "unbindFrom",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": [
+                      "jQuery",
+                      "String"
+                    ],
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "fn",
+                    "description": "Handler function",
+                    "jsType": "Function",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Removes event handlers from the block's main DOM elements or its nested elements"
+              }
+            },
+            {
+              "key": "_buildEventName",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "String"
+                },
+                "description": "Builds a full name for an event"
+              }
+            },
+            {
+              "key": "_buildOneEventName",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "event",
+                    "description": "Event name",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "String"
+                },
+                "description": "Builds a full name for a single event"
+              }
+            },
+            {
+              "key": "setMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "jQuery",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Sets a modifier for a block/nested element"
+              }
+            },
+            {
+              "key": "_extractModVal",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Nested element",
+                    "jsType": "jQuery",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elemName",
+                    "description": "Name of the nested element",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Modifier value",
+                  "jsType": "String"
+                },
+                "description": "Retrieves modifier value from the DOM node's CSS class"
+              }
+            },
+            {
+              "key": "_extractMods",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modNames",
+                    "description": "Names of modifiers",
+                    "jsType": "Array",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": "Object",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Hash of modifier values by names",
+                  "jsType": "Object"
+                },
+                "description": "Retrieves a name/value list of modifiers"
+              }
+            },
+            {
+              "key": "_onSetMod",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "oldModVal",
+                    "description": "Old modifier value",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": "jQuery",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elemName",
+                    "description": "Element name",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "description": "Sets a modifier's CSS class for a block's DOM element or nested element"
+              }
+            },
+            {
+              "key": "findElem",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Element where search is being performed",
+                    "jsType": "jQuery",
+                    "isOptional": true,
+                    "default": "this.domElem"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "names",
+                    "description": "Nested element name (or names separated by spaces)",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "strictMode",
+                    "description": "",
+                    "jsType": "Boolean",
+                    "isOptional": true,
+                    "default": "false"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "DOM elements",
+                  "jsType": "jQuery"
+                },
+                "description": "Finds elements nested in a block"
+              }
+            },
+            {
+              "key": "_filterFindElemResults",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "res",
+                    "description": "DOM elements",
+                    "jsType": "jQuery"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "DOM elements",
+                  "jsType": "jQuery"
+                },
+                "description": "Filters results of findElem helper execution in strict mode"
+              }
+            },
+            {
+              "key": "_elem",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "name",
+                    "description": "Nested element name",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "DOM elements",
+                  "jsType": "jQuery"
+                },
+                "description": "Finds elements nested in a block"
+              }
+            },
+            {
+              "key": "elem",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "names",
+                    "description": "Nested element name (or names separated by spaces)",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "DOM elements",
+                  "jsType": "jQuery"
+                },
+                "description": "Lazy search for elements nested in a block (caches results)"
+              }
+            },
+            {
+              "key": "closestElem",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "context",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elemName",
+                    "description": "Element name",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "DOM elements",
+                  "jsType": "jQuery"
+                },
+                "description": "Finds elements outside the context"
+              }
+            },
+            {
+              "key": "dropElemCache",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "names",
+                    "description": "Nested element name (or names separated by spaces)",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "this"
+                },
+                "description": "Clearing the cache for elements"
+              }
+            },
+            {
+              "key": "elemParams",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": [
+                      "String",
+                      "jQuery"
+                    ]
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "Parameters",
+                  "jsType": "Object"
+                },
+                "description": "Retrieves parameters of a block element"
+              }
+            },
+            {
+              "key": "elemify",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element",
+                    "jsType": "jQuery"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "elemName",
+                    "description": "Name",
+                    "jsType": "String"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "jQuery"
+                },
+                "description": "Elemify given element"
+              }
+            },
+            {
+              "key": "containsDomElem",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "protected",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "ctx",
+                    "description": "Element where check is being performed",
+                    "jsType": "jQuery",
+                    "isOptional": true,
+                    "default": "this.domElem"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "domElem",
+                    "description": "DOM element",
+                    "jsType": "jQuery"
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "Boolean"
+                },
+                "description": "Checks whether a DOM element is in a block"
+              }
+            },
+            {
+              "key": "buildSelector",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "elem",
+                    "description": "Element name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modName",
+                    "description": "Modifier name",
+                    "jsType": "String",
+                    "isOptional": true
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "modVal",
+                    "description": "Modifier value",
+                    "jsType": "String",
+                    "isOptional": true
+                  }
+                ],
+                "returns": {
+                  "jsdocType": "returns",
+                  "description": "",
+                  "jsType": "String"
+                },
+                "description": "Builds a CSS selector corresponding to a block/element and modifier"
+              }
+            },
+            {
+              "key": "_destruct",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "accessLevel": "private",
+                "description": "Destructs a block"
+              }
+            }
+          ]
+        },
+        "members": {
+          "jsdocType": "type",
+          "jsType": "Object",
+          "props": [
+            {
+              "key": "domElem",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "jQuery",
+                "isReadOnly": true,
+                "description": "DOM elements of block"
+              }
+            },
+            {
+              "key": "_eventNameCache",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "accessLevel": "private",
+                "description": "Cache for names of events on DOM elements"
+              }
+            },
+            {
+              "key": "_elemCache",
+              "val": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "accessLevel": "private",
+                "description": "Cache for elements"
+              }
+            }
+          ]
+        },
+        "description": "Base block for creating BEM blocks that have DOM representation",
+        "cons": {
+          "jsdocType": "type",
+          "jsType": "Function",
+          "accessLevel": "private",
+          "params": [
+            {
+              "jsdocType": "param",
+              "name": "domElem",
+              "description": "DOM element that the block is created on",
+              "jsType": "jQuery"
+            },
+            {
+              "jsdocType": "param",
+              "name": "params",
+              "description": "Block parameters",
+              "jsType": "Object"
+            },
+            {
+              "jsdocType": "param",
+              "name": "initImmediately",
+              "description": "",
+              "jsType": "Boolean",
+              "isOptional": true,
+              "default": "true"
+            }
+          ]
+        }
+      },
+      "classes": {
+        "BEMDOM": {
+          "jsdocType": "class",
+          "name": "BEMDOM",
+          "static": {
+            "jsdocType": "type",
+            "jsType": "Object",
+            "props": [
+              {
+                "key": "scope",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "jQuery",
+                  "jsValue": null,
+                  "description": "Scope, will be set on onDomReady to `<body>`"
+                }
+              },
+              {
+                "key": "doc",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "jQuery",
+                  "description": "Document shortcut"
+                }
+              },
+              {
+                "key": "win",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "jQuery",
+                  "description": "Window shortcut"
+                }
+              },
+              {
+                "key": "_processLive",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "heedLive",
+                      "description": "Whether to take into account that the block already processed its live properties",
+                      "jsType": "Boolean",
+                      "isOptional": true,
+                      "default": "false"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Whether the block is a live block",
+                    "jsType": "Boolean"
+                  },
+                  "description": "Processes a block's live properties"
+                }
+              },
+              {
+                "key": "init",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Root DOM node",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ],
+                      "isOptional": true,
+                      "default": "scope"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "ctx Initialization context",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Initializes blocks on a fragment of the DOM tree"
+                }
+              },
+              {
+                "key": "destruct",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Root DOM node",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "excludeSelf",
+                      "description": "Exclude the main domElem",
+                      "jsType": "Boolean",
+                      "isOptional": true,
+                      "default": "false"
+                    }
+                  ],
+                  "description": "Destroys blocks on a fragment of the DOM tree"
+                }
+              },
+              {
+                "key": "update",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Root DOM node",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "content",
+                      "description": "New content",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Updated root DOM node",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Replaces a fragment of the DOM tree inside the context, destroying old blocks and intializing new ones"
+                }
+              },
+              {
+                "key": "replace",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Root DOM node",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "content",
+                      "description": "Content to be added",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "New content",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Changes a fragment of the DOM tree including the context and initializes blocks."
+                }
+              },
+              {
+                "key": "append",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Root DOM node",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "content",
+                      "description": "Content to be added",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "New content",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Adds a fragment of the DOM tree at the end of the context and initializes blocks"
+                }
+              },
+              {
+                "key": "prepend",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Root DOM node",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "content",
+                      "description": "Content to be added",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "New content",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Adds a fragment of the DOM tree at the beginning of the context and initializes blocks"
+                }
+              },
+              {
+                "key": "before",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Contextual DOM node",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "content",
+                      "description": "Content to be added",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "New content",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Adds a fragment of the DOM tree before the context and initializes blocks"
+                }
+              },
+              {
+                "key": "after",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Contextual DOM node",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "content",
+                      "description": "Content to be added",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "New content",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Adds a fragment of the DOM tree after the context and initializes blocks"
+                }
+              },
+              {
+                "key": "_buildCtxEventName",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event name",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  "description": "Builds a full name for a live event"
+                }
+              },
+              {
+                "key": "liveInitOnEvent",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elemName",
+                      "description": "Element name or names (separated by spaces)",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "callback",
+                      "description": "Handler to call after successful initialization",
+                      "jsType": "Function",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Helper for live initialization for an event on DOM elements of a block or its elements"
+                }
+              },
+              {
+                "key": "liveBindTo",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "to",
+                      "description": "Description (object with modName, modVal, elem) or name of the element or elements (space-separated)",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "callback",
+                      "description": "Handler",
+                      "jsType": "Function",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Helper for subscribing to live events on DOM elements of a block or its elements"
+                }
+              },
+              {
+                "key": "liveUnbindFrom",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Name of the element or elements (space-separated)",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "callback",
+                      "description": "Handler",
+                      "jsType": "Function",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Helper for unsubscribing from live events on DOM elements of a block or its elements"
+                }
+              },
+              {
+                "key": "_liveInitOnBlockEvent",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "blockName",
+                      "description": "Name of the block that should trigger a reaction when initialized",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "callback",
+                      "description": "Handler to be called after successful initialization in the new block's context",
+                      "jsType": "Function"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "findFnName",
+                      "description": "Name of the method for searching",
+                      "jsType": "String"
+                    }
+                  ],
+                  "description": "Helper for live initialization when a different block is initialized"
+                }
+              },
+              {
+                "key": "liveInitOnBlockEvent",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "blockName",
+                      "description": "Name of the block that should trigger a reaction when initialized",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "callback",
+                      "description": "Handler to be called after successful initialization in the new block's context",
+                      "jsType": "Function"
+                    }
+                  ],
+                  "description": "Helper for live initialization for a different block's event on the current block's DOM element"
+                }
+              },
+              {
+                "key": "liveInitOnBlockInsideEvent",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "blockName",
+                      "description": "Name of the block that should trigger a reaction when initialized",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "callback",
+                      "description": "Handler to be called after successful initialization in the new block's context",
+                      "jsType": "Function",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Helper for live initialization for a different block's event inside the current block"
+                }
+              },
+              {
+                "key": "on",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "The element in which the event will be listened for",
+                      "jsType": "jQuery",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "data",
+                      "description": "Additional information that the handler gets as e.data",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler",
+                      "jsType": "Function"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fnCtx",
+                      "description": "Handler's context",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Adds a live event handler to a block, based on a specified element where the event will be listened for"
+                }
+              },
+              {
+                "key": "un",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "The element in which the event was being listened for",
+                      "jsType": "jQuery",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler",
+                      "jsType": "Function",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fnCtx",
+                      "description": "Handler context",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Removes the live event handler from a block, based on a specified element where the event was being listened for"
+                }
+              },
+              {
+                "key": "_liveCtxBind",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "The element in which the event will be listened for",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "data",
+                      "description": "Additional information that the handler gets as e.data",
+                      "jsType": "Object",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler",
+                      "jsType": "Function"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fnCtx",
+                      "description": "Handler context",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Adds a live event handler to a block, based on a specified element where the event will be listened for"
+                }
+              },
+              {
+                "key": "_liveCtxUnbind",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "The element in which the event was being listened for",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "e",
+                      "description": "Event name",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler",
+                      "jsType": "Function",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fnCtx",
+                      "description": "Handler context",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Removes a live event handler from a block, based on a specified element where the event was being listened for"
+                }
+              },
+              {
+                "key": "_extractElemNameFrom",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "jQuery"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": [
+                      "String",
+                      "undef"
+                    ]
+                  },
+                  "description": "Retrieves the name of an element nested in a block"
+                }
+              },
+              {
+                "key": "_buildModClassPrefix",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ],
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  "description": "Builds a prefix for the CSS class of a DOM element or nested element of the block, based on modifier name"
+                }
+              },
+              {
+                "key": "_buildModValRE",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "quantifiers",
+                      "description": "Regular expression quantifiers",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "RegExp"
+                  },
+                  "description": "Builds a regular expression for extracting modifier values from a DOM element or nested element of a block"
+                }
+              },
+              {
+                "key": "_buildElemNameRE",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "RegExp"
+                  },
+                  "description": "Builds a regular expression for extracting names of elements nested in a block"
+                }
+              },
+              {
+                "key": "buildClass",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  "description": "Builds a CSS class corresponding to the block/element and modifier"
+                }
+              },
+              {
+                "key": "buildSelector",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  "description": "Builds a CSS selector corresponding to the block/element and modifier"
+                }
+              }
+            ]
+          },
+          "proto": {
+            "jsdocType": "type",
+            "jsType": "Object",
+            "props": [
+              {
+                "key": "findBlocksInside",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Block element",
+                      "jsType": [
+                        "String",
+                        "jQuery"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "block",
+                      "description": "Name or description (block,modName,modVal) of the block to find",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "BEMDOM"
+                  },
+                  "description": "Finds blocks inside the current block or its elements (including context)"
+                }
+              },
+              {
+                "key": "findBlockInside",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Block element",
+                      "jsType": [
+                        "String",
+                        "jQuery"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "block",
+                      "description": "Name or description (block,modName,modVal) of the block to find",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "BEMDOM"
+                  },
+                  "description": "Finds the first block inside the current block or its elements (including context)"
+                }
+              },
+              {
+                "key": "findBlocksOutside",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Block element",
+                      "jsType": [
+                        "String",
+                        "jQuery"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "block",
+                      "description": "Name or description (block,modName,modVal) of the block to find",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "BEMDOM"
+                  },
+                  "description": "Finds blocks outside the current block or its elements (including context)"
+                }
+              },
+              {
+                "key": "findBlockOutside",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Block element",
+                      "jsType": [
+                        "String",
+                        "jQuery"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "block",
+                      "description": "Name or description (block,modName,modVal) of the block to find",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "BEMDOM"
+                  },
+                  "description": "Finds the first block outside the current block or its elements (including context)"
+                }
+              },
+              {
+                "key": "findBlocksOn",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Block element",
+                      "jsType": [
+                        "String",
+                        "jQuery"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "block",
+                      "description": "Name or description (block,modName,modVal) of the block to find",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "BEMDOM"
+                  },
+                  "description": "Finds blocks on DOM elements of the current block or its elements"
+                }
+              },
+              {
+                "key": "findBlockOn",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Block element",
+                      "jsType": [
+                        "String",
+                        "jQuery"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "block",
+                      "description": "Name or description (block,modName,modVal) of the block to find",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "BEMDOM"
+                  },
+                  "description": "Finds the first block on DOM elements of the current block or its elements"
+                }
+              },
+              {
+                "key": "bindToDomElem",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "domElem",
+                      "description": "DOM element where the event will be listened for",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name or event object",
+                      "jsType": [
+                        "String",
+                        "Object"
+                      ]
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler function, which will be executed in the block's context",
+                      "jsType": "Function"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Adds an event handler for any DOM element"
+                }
+              },
+              {
+                "key": "bindToDoc",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler function, which will be executed in the block's context",
+                      "jsType": "Function"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Adds an event handler to the document"
+                }
+              },
+              {
+                "key": "bindToWin",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler function, which will be executed in the block's context",
+                      "jsType": "Function"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Adds an event handler to the window"
+                }
+              },
+              {
+                "key": "bindTo",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler function, which will be executed in the block's context",
+                      "jsType": "Function"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Adds an event handler to the block's main DOM elements or its nested elements"
+                }
+              },
+              {
+                "key": "unbindFromDomElem",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "domElem",
+                      "description": "DOM element where the event was being listened for",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler function",
+                      "jsType": "Function",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Removes event handlers from any DOM element"
+                }
+              },
+              {
+                "key": "unbindFromDoc",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler function",
+                      "jsType": "Function",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Removes event handler from document"
+                }
+              },
+              {
+                "key": "unbindFromWin",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler function",
+                      "jsType": "Function",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Removes event handler from window"
+                }
+              },
+              {
+                "key": "unbindFrom",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": [
+                        "jQuery",
+                        "String"
+                      ],
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "fn",
+                      "description": "Handler function",
+                      "jsType": "Function",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Removes event handlers from the block's main DOM elements or its nested elements"
+                }
+              },
+              {
+                "key": "_buildEventName",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  "description": "Builds a full name for an event"
+                }
+              },
+              {
+                "key": "_buildOneEventName",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "event",
+                      "description": "Event name",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  "description": "Builds a full name for a single event"
+                }
+              },
+              {
+                "key": "setMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "jQuery",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Sets a modifier for a block/nested element"
+                }
+              },
+              {
+                "key": "_extractModVal",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Nested element",
+                      "jsType": "jQuery",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elemName",
+                      "description": "Name of the nested element",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Modifier value",
+                    "jsType": "String"
+                  },
+                  "description": "Retrieves modifier value from the DOM node's CSS class"
+                }
+              },
+              {
+                "key": "_extractMods",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modNames",
+                      "description": "Names of modifiers",
+                      "jsType": "Array",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": "Object",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Hash of modifier values by names",
+                    "jsType": "Object"
+                  },
+                  "description": "Retrieves a name/value list of modifiers"
+                }
+              },
+              {
+                "key": "_onSetMod",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "oldModVal",
+                      "description": "Old modifier value",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": "jQuery",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elemName",
+                      "description": "Element name",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "description": "Sets a modifier's CSS class for a block's DOM element or nested element"
+                }
+              },
+              {
+                "key": "findElem",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Element where search is being performed",
+                      "jsType": "jQuery",
+                      "isOptional": true,
+                      "default": "this.domElem"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "names",
+                      "description": "Nested element name (or names separated by spaces)",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "strictMode",
+                      "description": "",
+                      "jsType": "Boolean",
+                      "isOptional": true,
+                      "default": "false"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "DOM elements",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Finds elements nested in a block"
+                }
+              },
+              {
+                "key": "_filterFindElemResults",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "res",
+                      "description": "DOM elements",
+                      "jsType": "jQuery"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "DOM elements",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Filters results of findElem helper execution in strict mode"
+                }
+              },
+              {
+                "key": "_elem",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "name",
+                      "description": "Nested element name",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "DOM elements",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Finds elements nested in a block"
+                }
+              },
+              {
+                "key": "elem",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "names",
+                      "description": "Nested element name (or names separated by spaces)",
+                      "jsType": "String"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "DOM elements",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Lazy search for elements nested in a block (caches results)"
+                }
+              },
+              {
+                "key": "closestElem",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "context",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elemName",
+                      "description": "Element name",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "DOM elements",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Finds elements outside the context"
+                }
+              },
+              {
+                "key": "dropElemCache",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "names",
+                      "description": "Nested element name (or names separated by spaces)",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "this"
+                  },
+                  "description": "Clearing the cache for elements"
+                }
+              },
+              {
+                "key": "elemParams",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": [
+                        "String",
+                        "jQuery"
+                      ]
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "Parameters",
+                    "jsType": "Object"
+                  },
+                  "description": "Retrieves parameters of a block element"
+                }
+              },
+              {
+                "key": "elemify",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element",
+                      "jsType": "jQuery"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "elemName",
+                      "description": "Name",
+                      "jsType": "String"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "jQuery"
+                  },
+                  "description": "Elemify given element"
+                }
+              },
+              {
+                "key": "containsDomElem",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "protected",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "ctx",
+                      "description": "Element where check is being performed",
+                      "jsType": "jQuery",
+                      "isOptional": true,
+                      "default": "this.domElem"
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "domElem",
+                      "description": "DOM element",
+                      "jsType": "jQuery"
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "Boolean"
+                  },
+                  "description": "Checks whether a DOM element is in a block"
+                }
+              },
+              {
+                "key": "buildSelector",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "params": [
+                    {
+                      "jsdocType": "param",
+                      "name": "elem",
+                      "description": "Element name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modName",
+                      "description": "Modifier name",
+                      "jsType": "String",
+                      "isOptional": true
+                    },
+                    {
+                      "jsdocType": "param",
+                      "name": "modVal",
+                      "description": "Modifier value",
+                      "jsType": "String",
+                      "isOptional": true
+                    }
+                  ],
+                  "returns": {
+                    "jsdocType": "returns",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  "description": "Builds a CSS selector corresponding to a block/element and modifier"
+                }
+              },
+              {
+                "key": "_destruct",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Function",
+                  "accessLevel": "private",
+                  "description": "Destructs a block"
+                }
+              }
+            ]
+          },
+          "members": {
+            "jsdocType": "type",
+            "jsType": "Object",
+            "props": [
+              {
+                "key": "domElem",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "jQuery",
+                  "isReadOnly": true,
+                  "description": "DOM elements of block"
+                }
+              },
+              {
+                "key": "_eventNameCache",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Object",
+                  "accessLevel": "private",
+                  "description": "Cache for names of events on DOM elements"
+                }
+              },
+              {
+                "key": "_elemCache",
+                "val": {
+                  "jsdocType": "type",
+                  "jsType": "Object",
+                  "accessLevel": "private",
+                  "description": "Cache for elements"
+                }
+              }
+            ]
+          },
+          "description": "Base block for creating BEM blocks that have DOM representation",
+          "cons": {
+            "jsdocType": "type",
+            "jsType": "Function",
+            "accessLevel": "private",
+            "params": [
+              {
+                "jsdocType": "param",
+                "name": "domElem",
+                "description": "DOM element that the block is created on",
+                "jsType": "jQuery"
+              },
+              {
+                "jsdocType": "param",
+                "name": "params",
+                "description": "Block parameters",
+                "jsType": "Object"
+              },
+              {
+                "jsdocType": "param",
+                "name": "initImmediately",
+                "description": "",
+                "jsType": "Boolean",
+                "isOptional": true,
+                "default": "true"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

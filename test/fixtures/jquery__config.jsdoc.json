@@ -1,0 +1,30 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "jquery__config",
+      "description": "Configuration for jQuery",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Object",
+        "props": [
+          {
+            "key": "url",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "String",
+              "jsValue": "//yastatic.net/jquery/2.1.0/jquery.min.js",
+              "description": "URL for loading jQuery if it does not exist"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "jsdocType": "module",
+      "name": "jquery__config",
+      "description": "Configuration for jQuery"
+    }
+  ]
+}

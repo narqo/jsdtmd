@@ -1,0 +1,40 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "events__channels",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Function",
+        "params": [
+          {
+            "jsdocType": "param",
+            "name": "id",
+            "description": "Channel ID",
+            "jsType": "String",
+            "isOptional": true,
+            "default": "'default'"
+          },
+          {
+            "jsdocType": "param",
+            "name": "drop",
+            "description": "Destroy the channel",
+            "jsType": "Boolean",
+            "isOptional": true,
+            "default": "false"
+          }
+        ],
+        "returns": {
+          "jsdocType": "returns",
+          "description": "Communication channel",
+          "jsType": [
+            "events:Emitter",
+            "undefined"
+          ]
+        },
+        "description": "Returns/destroys a named communication channel"
+      }
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "events",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Object",
+        "props": [
+          {
+            "key": "Event",
+            "val": {
+              "jsdocType": "class",
+              "name": "Event",
+              "proto": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "props": [
+                  {
+                    "key": "preventDefault",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "Function",
+                      "description": "Prevents default action"
+                    }
+                  },
+                  {
+                    "key": "isDefaultPrevented",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "Function",
+                      "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "Boolean"
+                      },
+                      "description": "Returns whether is default action prevented"
+                    }
+                  },
+                  {
+                    "key": "stopPropagation",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "Function",
+                      "description": "Stops propagation"
+                    }
+                  },
+                  {
+                    "key": "isPropagationStopped",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "Function",
+                      "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "Boolean"
+                      },
+                      "description": "Returns whether is propagation stopped"
+                    }
+                  }
+                ]
+              },
+              "members": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "props": [
+                  {
+                    "key": "type",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "String",
+                      "description": "Type"
+                    }
+                  },
+                  {
+                    "key": "target",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "String",
+                      "description": "Target"
+                    }
+                  },
+                  {
+                    "key": "result",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "*",
+                      "description": "Result"
+                    }
+                  },
+                  {
+                    "key": "data",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "*",
+                      "description": "Data"
+                    }
+                  }
+                ]
+              },
+              "cons": {
+                "jsdocType": "type",
+                "jsType": "Function",
+                "params": [
+                  {
+                    "jsdocType": "param",
+                    "name": "type",
+                    "description": "",
+                    "jsType": "String"
+                  },
+                  {
+                    "jsdocType": "param",
+                    "name": "target",
+                    "description": "",
+                    "jsType": "Object"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "key": "Emitter",
+            "val": {
+              "jsdocType": "class",
+              "name": "Emitter",
+              "proto": {
+                "jsdocType": "type",
+                "jsType": "Object",
+                "props": [
+                  {
+                    "key": "on",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "Function",
+                      "params": [
+                        {
+                          "jsdocType": "param",
+                          "name": "e",
+                          "description": "Event type",
+                          "jsType": "String"
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "data",
+                          "description": "Additional data that the handler gets as e.data",
+                          "jsType": "Object",
+                          "isOptional": true
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "fn",
+                          "description": "Handler",
+                          "jsType": "Function"
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "ctx",
+                          "description": "Handler context",
+                          "jsType": "Object",
+                          "isOptional": true
+                        }
+                      ],
+                      "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "this"
+                      },
+                      "description": "Adds an event handler"
+                    }
+                  },
+                  {
+                    "key": "once",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "Function",
+                      "params": [
+                        {
+                          "jsdocType": "param",
+                          "name": "e",
+                          "description": "Event type",
+                          "jsType": "String"
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "data",
+                          "description": "Additional data that the handler gets as e.data",
+                          "jsType": "Object",
+                          "isOptional": true
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "fn",
+                          "description": "Handler",
+                          "jsType": "Function"
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "ctx",
+                          "description": "Handler context",
+                          "jsType": "Object",
+                          "isOptional": true
+                        }
+                      ],
+                      "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "this"
+                      },
+                      "description": "Adds a one time handler for the event.\nHandler is executed only the next time the event is fired, after which it is removed."
+                    }
+                  },
+                  {
+                    "key": "un",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "Function",
+                      "params": [
+                        {
+                          "jsdocType": "param",
+                          "name": "e",
+                          "description": "Event type",
+                          "jsType": "String",
+                          "isOptional": true
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "fn",
+                          "description": "Handler",
+                          "jsType": "Function",
+                          "isOptional": true
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "ctx",
+                          "description": "Handler context",
+                          "jsType": "Object",
+                          "isOptional": true
+                        }
+                      ],
+                      "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "this"
+                      },
+                      "description": "Removes event handler or handlers"
+                    }
+                  },
+                  {
+                    "key": "emit",
+                    "val": {
+                      "jsdocType": "type",
+                      "jsType": "Function",
+                      "params": [
+                        {
+                          "jsdocType": "param",
+                          "name": "e",
+                          "description": "Event",
+                          "jsType": [
+                            "String",
+                            "events:Event"
+                          ]
+                        },
+                        {
+                          "jsdocType": "param",
+                          "name": "data",
+                          "description": "Additional data",
+                          "jsType": "Object",
+                          "isOptional": true
+                        }
+                      ],
+                      "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "this"
+                      },
+                      "description": "Fires event handlers"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

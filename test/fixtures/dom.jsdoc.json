@@ -1,0 +1,119 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "dom",
+      "description": "some DOM utils",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Object",
+        "props": [
+          {
+            "key": "contains",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "ctx",
+                  "description": "DOM elem where check is being performed",
+                  "jsType": "jQuery"
+                },
+                {
+                  "jsdocType": "param",
+                  "name": "domElem",
+                  "description": "DOM elem to check",
+                  "jsType": "jQuery"
+                }
+              ],
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": "Boolean"
+              },
+              "description": "Checks whether a DOM elem is in a context"
+            }
+          },
+          {
+            "key": "getFocused",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": "jQuery"
+              },
+              "description": "Returns current focused DOM elem in document"
+            }
+          },
+          {
+            "key": "containsFocus",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "domElem",
+                  "description": "",
+                  "jsType": "jQuery"
+                }
+              ],
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": "Boolean"
+              },
+              "description": "Checks whether a DOM element contains focus"
+            }
+          },
+          {
+            "key": "isFocusable",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "domElem",
+                  "description": "",
+                  "jsType": "jQuery"
+                }
+              ],
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": "Boolean"
+              },
+              "description": "Checks whether a browser currently can set focus on DOM elem"
+            }
+          },
+          {
+            "key": "isEditable",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "domElem",
+                  "description": "",
+                  "jsType": "jQuery"
+                }
+              ],
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": "Boolean"
+              },
+              "description": "Checks whether a domElem is intended to edit text"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "cookie",
+      "description": "inspired from $.cookie plugin by Klaus Hartl (stilbuero.de)",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Object",
+        "props": [
+          {
+            "key": "get",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "name",
+                  "description": "",
+                  "jsType": "String"
+                }
+              ],
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": [
+                  "String",
+                  "null"
+                ]
+              },
+              "description": "Returns cookie by given name"
+            }
+          },
+          {
+            "key": "set",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "name",
+                  "description": "",
+                  "jsType": "String"
+                },
+                {
+                  "jsdocType": "param",
+                  "name": "val",
+                  "description": "",
+                  "jsType": "String"
+                },
+                {
+                  "jsdocType": "param",
+                  "name": "options",
+                  "description": "",
+                  "jsType": "Object"
+                }
+              ],
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": "this"
+              },
+              "description": "Sets cookie by given name"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

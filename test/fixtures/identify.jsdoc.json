@@ -1,0 +1,35 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "identify",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Function",
+        "params": [
+          {
+            "jsdocType": "param",
+            "name": "obj",
+            "description": "Object that needs to be identified",
+            "jsType": "Object"
+          },
+          {
+            "jsdocType": "param",
+            "name": "onlyGet",
+            "description": "Return a unique value only if it had already been assigned before",
+            "jsType": "Boolean",
+            "isOptional": true,
+            "default": "false"
+          }
+        ],
+        "returns": {
+          "jsdocType": "returns",
+          "description": "ID",
+          "jsType": "String"
+        },
+        "description": "Makes unique ID"
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "objects",
+      "description": "A set of helpers to work with JavaScript objects",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Object",
+        "props": [
+          {
+            "key": "extend",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "target",
+                  "description": "object to extend",
+                  "jsType": "Object"
+                },
+                {
+                  "jsdocType": "param",
+                  "name": "source",
+                  "description": "",
+                  "jsType": "...Object"
+                }
+              ],
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": "Object"
+              },
+              "description": "Extends a given target by"
+            }
+          },
+          {
+            "key": "isEmpty",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "obj",
+                  "description": "",
+                  "jsType": "Object"
+                }
+              ],
+              "returns": {
+                "jsdocType": "returns",
+                "description": "",
+                "jsType": "Boolean"
+              },
+              "description": "Check whether a given object is empty (contains no enumerable properties)"
+            }
+          },
+          {
+            "key": "each",
+            "val": {
+              "jsdocType": "type",
+              "jsType": "Function",
+              "params": [
+                {
+                  "jsdocType": "param",
+                  "name": "obj",
+                  "description": "object to iterate",
+                  "jsType": "Object"
+                },
+                {
+                  "jsdocType": "param",
+                  "name": "fn",
+                  "description": "callback",
+                  "jsType": "Function"
+                },
+                {
+                  "jsdocType": "param",
+                  "name": "ctx",
+                  "description": "callbacks's context",
+                  "jsType": "Object",
+                  "isOptional": true
+                }
+              ],
+              "description": "Generic iterator function over object"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
