@@ -78,6 +78,7 @@ match(this.jsdocType === 'class')(function() {
     this.description && (res += apply({ block : 'para', content : this.description }));
 
     if(cons) {
+        // TODO: constructor's description is the same as Function's
         local({ depth : depth })(function() {
             var _res = '',
                 depth = this.depth,
@@ -122,7 +123,8 @@ match(this.jsdocType === 'class')(function() {
 });
 
 match(this.jsdocType === 'type')(
-    match(this.jsType)(function() {
+    match(this.jsType)(
+        function() {
             var res = '';
 
             if(this.jsType !== 'Function') {
@@ -159,7 +161,7 @@ match(this.jsdocType === 'type')(
 
                 res += apply({ name : ctx.key }, val);
             });
-        }, this);
+        });
 
         return res;
     }),
