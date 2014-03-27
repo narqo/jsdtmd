@@ -10,14 +10,14 @@ match(this.jsdocType === 'root')(function() {
 
     var res = '';
 
-    local({ depth : 0, _res : '' })(function() {
-        this.depth++;
-        this.modules.forEach(function(ctx) {
-            this._res += apply(ctx)
-        }, this);
-        this.depth--;
+    local({ depth : 0 })(function() {
+        var _res = '';
 
-        res = this._res;
+        this.modules.forEach(function(ctx) {
+            _res += apply(ctx, { depth : this.depth + 1 });
+        }, this);
+
+        res = _res;
     });
 
     return res;
@@ -29,15 +29,17 @@ match(this.jsdocType === 'module')(function() {
     var name = apply('signature'),
         res = apply({ block : 'headline', mods : { level : this.depth }, content : name });
 
-    local({ depth : this.depth + 1, _res : '' })(function() {
-        this.description && (this._res += apply({ block : 'para', content : this.description }));
+    local({
+        moduleName : this.name,
+        name : undefined,
+        depth : this.depth + 1
+    })(function() {
+        var _res = '';
 
-        if(this.exports) {
-            this._res += apply({ block : 'para', content : 'Exports:' });
-            this._res += apply(this.exports)
-        }
+        this.description && (_res += apply({ block : 'para', content : this.description }));
+        this.exports && (_res += apply(this.exports));
 
-        res += this._res;
+        res += _res;
     });
 
     return res;
@@ -47,8 +49,8 @@ match(this.jsdocType === 'class')(function() {
     log('⇢ class', '@depth', this.depth);
 
     var depth = this.depth,
-        name = apply('signature'),
-        res = apply({ block : 'headline', mods : { level : depth++ }, content : name });
+        classSign = apply('signature'),
+        res = apply({ block : 'headline', mods : { level : depth++ }, content : classSign });
 
     this.description && (res += apply({ block : 'para', content : this.description }));
 
@@ -57,37 +59,39 @@ match(this.jsdocType === 'class')(function() {
         members = this.members;
 
     if(cons) {
-        local({ depth : depth, _res : '' })(function() {
-            var depth = this.depth,
-                consSign = local({ name : this.name })(apply('signature', cons));
+        local({ depth : depth })(function() {
+            var _res = '',
+                depth = this.depth,
+                consSign = apply('signature', { name : this.name }, cons);
 
-            this._res += apply({ block : 'headline', mods : { level : depth++ }, content : 'Constructor' });
-            this._res += apply({ block : 'headline', mods : { level : depth++ }, content : consSign });
-
+            _res += apply({ block : 'headline', mods : { level : depth++ }, content : 'Constructor' });
+            _res += apply({ block : 'headline', mods : { level : depth++ }, content : consSign });
 
             if(cons.params) {
-                this._res += apply({ block : 'headline', mods : { level : depth }, content : 'Parameters:' });
-                this._res += cons.params.map(function(ctx) { return apply(ctx) }).join('') + '\n';
+                _res += apply({ block : 'headline', mods : { level : depth }, content : 'Parameters:' });
+                cons.params.forEach(function(ctx) { _res += apply(ctx) });
+                _res += '\n'
             }
 
-            res += this._res;
+            res += _res;
         });
     }
 
-    local({ depth : depth++, _res : '' })(function() {
+    local({ depth : depth })(function() {
+        var _res = '',
+            depth = this.depth;
+
         if(proto) {
-            this._res += apply({ block : 'headline', mods : { level : this.depth++ }, content : 'Methods:' });
-            this._res += apply(proto);
-            this.depth--;
-        };
+            _res += apply({ block : 'headline', mods : { level : depth }, content : 'Methods:' });
+            _res += apply(proto, { depth : depth + 1 });
+        }
 
         if(members) {
-            this._res += apply({ block : 'headline', mods : { level : this.depth++ }, content : 'Properties:' });
-            this._res += apply(members);
-            this.depth--;
-        };
+            _res += apply({ block : 'headline', mods : { level : depth }, content : 'Properties:' });
+            _res += apply(members, { depth : depth + 1 });
+        }
 
-        res += this._res;
+        res += _res;
     });
 
     return res;
@@ -95,8 +99,6 @@ match(this.jsdocType === 'class')(function() {
 
 match(this.jsdocType === 'type')(
     match(this.jsType)(function() {
-        console.log('⇢ type', this.jsType, '@depth', this.depth);
-
         var res = '';
 
         this.description &&
@@ -108,8 +110,6 @@ match(this.jsdocType === 'type')(
         return res;
     }),
     match(this.jsType === 'Object')(function() {
-        console.log('⇢ type Object', '@depth', this.depth);
-
         var res = '';
 
         this.props.forEach(function(ctx) {
@@ -121,29 +121,35 @@ match(this.jsdocType === 'type')(
                 return;
             }
 
-            var propName = local({ name : ctx.key })(apply('signature', val));
-            res += apply({ block : 'headline', mods : { level : this.depth }, content : propName });
+            var depth = this.depth;
+            if(val.jsType !== 'Function') {
+                // `Function`'s signature will be processed within `jsType === 'Function'`
+                var propSign = apply('signature', val, { name : ctx.key });
+                res += apply({ block : 'headline', mods : { level : depth }, content : propSign });
+                depth++;
+            }
 
-            this.depth++;
-            res += apply(val);
-            this.depth--;
+            res += apply({ name : ctx.key, depth : depth }, val);
         }, this);
 
         return res;
     }),
     match(this.jsType === 'Function')(function() {
-        console.log('⇢ type Function', '@depth', this.depth);
+        var res = '',
+            funcSing = apply('signature');
 
-        var res = '';
+        res += apply({ block : 'headline', mods : { level : this.depth }, content : funcSing });
+
         this.description && (res += apply({ block : 'para', content : this.description }));
 
-        var depth = this.depth,
+        var depth = this.depth + 1,
             params = this.params,
             returns = this.returns;
 
         if(params) {
             res += apply({ block : 'headline', mods : { level : depth }, content : 'Parameters:' });
-            res += params.map(function(ctx) { return apply(ctx) }).join('') + '\n';
+            params.forEach(function(ctx) { res += apply(ctx) });
+            res += '\n';
         }
 
         if(returns) {
@@ -152,6 +158,10 @@ match(this.jsdocType === 'type')(
         }
 
         return res;
+    },
+    function() {
+        log('⇢ type', this.jsType, '@depth', this.depth);
+        return applyNext();
     })
 );
 
@@ -207,14 +217,14 @@ match(this._mode === 'signature')(
             return apply('jstype-name') + ' ' + apply('jstype-type');
         }),
         match(this.jsType === 'Function')(function() {
-            var res = (this.name || '') + ' (';
+            var res;
 
             Array.isArray(this.params) &&
-                (res += ' ' + this.params.map(function(ctx) { return apply('signature', ctx) }).join(', ') + ' ');
+                (res = this.params.map(function(ctx) { return apply('signature', ctx) }).join(', '));
 
-            res += ')';
+            res = (this.name || '<Function>') + ' (' + (res? ' ' + res + ' ' : '') + ')';
 
-            this.returns && (res += ' → ' + local({ name : undefined })(apply('signature', this.returns)));
+            this.returns && (res += ' → ' + apply('signature', this.returns, { name : undefined }));
 
             return res;
         })
@@ -227,14 +237,13 @@ match(this._mode === 'signature')(
 
 match(this._mode === 'jstype')(function() {
     log('⇢ (jstype)');
-
     return apply('jstype-type') + ' ' + apply('jstype-name');
 });
 
 match(this._mode === 'jstype-name')(function() {
     log('⇢ (jstype / name)');
 
-    if(!this.name) return '';
+    if(!this.name) return '<Type>';
 
     var res = this.name;
 
