@@ -13,12 +13,13 @@ fs.readdirSync(FIXTURES_DIR).forEach(function(file) {
     var jsdocPath = path.join(FIXTURES_DIR, file);
     if(!fs.statSync(jsdocPath).isFile() || file.indexOf('.jsdoc.json') === -1) return;
 
+    console.log(file);
     var md = compile(jsdocPath);
     console.log('------------------');
-    console.log(md.toString());
-//    fs.writeFileSync(
-//        path.join(TESTS_DIR, file.replace('.jsdoc.json', '.md')),
-//        md);
+//    console.log(md.toString());
+    fs.writeFileSync(
+        path.join(TESTS_DIR, file.replace('.jsdoc.json', '.md')),
+        md);
 });
 
 function compile(jsdocPath) {
