@@ -1,27 +1,31 @@
-var log = console.error.bind(console);
+var log = function() {}; //console.error.bind(console);
 
 match(!this.jsdocType)(function() {
     log('⇢ ANY');
     return '';
 });
 
-match(this.jsdocType === 'root')(function() {
-    log('⇢ root');
+match(this.jsdocType === 'root')(
+    function() {
+        // Fallback if no modules exports
+        return '';
+    },
+    match(this.modules)(function() {
+        var res = '';
 
-    var res = '';
+        local({ depth : 0 })(function() {
+            this.modules.forEach(function(ctx) {
+                res += apply({ depth : this.depth + 1, modules : undefined }, ctx);
+            }, this);
+        });
 
-    local({ depth : 0 })(function() {
-        var _res = '';
-
-        this.modules.forEach(function(ctx) {
-            _res += apply(ctx, { depth : this.depth + 1 });
-        }, this);
-
-        res = _res;
-    });
-
-    return res;
-});
+        return res;
+    }),
+    function() {
+        log('⇢ root');
+        return applyNext();
+    }
+);
 
 match(this.jsdocType === 'module')(function() {
     log('⇢ module', '@depth', this.depth);
@@ -30,13 +34,15 @@ match(this.jsdocType === 'module')(function() {
         res = apply({ block : 'headline', mods : { level : this.depth }, content : name });
 
     local({
-        moduleName : this.name,
+        _moduleName : this.name,
+        _moduleDesc : this.description,
         name : undefined,
+        description : undefined,
         depth : this.depth + 1
     })(function() {
         var _res = '';
 
-        this.description && (_res += apply({ block : 'para', content : this.description }));
+        this._moduleDesc && (_res += apply({ block : 'para', content : this._moduleDesc }));
         this.exports && (_res += apply(this.exports));
 
         res += _res;
@@ -52,11 +58,24 @@ match(this.jsdocType === 'class')(function() {
         classSign = apply('signature'),
         res = apply({ block : 'headline', mods : { level : depth++ }, content : classSign });
 
-    this.description && (res += apply({ block : 'para', content : this.description }));
-
     var cons = this.cons,
-        proto = this.proto,
-        members = this.members;
+        clsAugments = this.augments,
+        clsProto = this.proto,
+        clsStatic = this.static,
+        clsMembers = this.members;
+
+    if(clsAugments) {
+        var augmentsJsType = clsAugments.jsType;
+        res += apply({
+            block : 'para',
+            content : 'Aughtments ' +
+                (Array.isArray(augmentsJsType)?
+                    augmentsJsType.join(' | ') :
+                    augmentsJsType)
+        });
+    }
+
+    this.description && (res += apply({ block : 'para', content : this.description }));
 
     if(cons) {
         local({ depth : depth })(function() {
@@ -69,7 +88,7 @@ match(this.jsdocType === 'class')(function() {
 
             if(cons.params) {
                 _res += apply({ block : 'headline', mods : { level : depth }, content : 'Parameters:' });
-                cons.params.forEach(function(ctx) { _res += apply(ctx) });
+                cons.params.forEach(function(ctx) { _res += apply({ params : undefined }, ctx) });
                 _res += '\n'
             }
 
@@ -81,14 +100,19 @@ match(this.jsdocType === 'class')(function() {
         var _res = '',
             depth = this.depth;
 
-        if(proto) {
-            _res += apply({ block : 'headline', mods : { level : depth }, content : 'Methods:' });
-            _res += apply(proto, { depth : depth + 1 });
+        if(clsMembers) {
+            _res += apply({ block : 'headline', mods : { level : depth }, content : 'Properties:' });
+            _res += apply(clsMembers, { depth : depth + 1 });
         }
 
-        if(members) {
-            _res += apply({ block : 'headline', mods : { level : depth }, content : 'Properties:' });
-            _res += apply(members, { depth : depth + 1 });
+        if(clsProto) {
+            _res += apply({ block : 'headline', mods : { level : depth }, content : 'Methods:' });
+            _res += apply(clsProto, { depth : depth + 1 });
+        }
+
+        if(clsStatic) {
+            _res += apply({ block : 'headline', mods : { level : depth }, content : 'Static:' });
+            _res += apply(clsStatic, { depth : depth + 1 });
         }
 
         res += _res;
@@ -99,37 +123,42 @@ match(this.jsdocType === 'class')(function() {
 
 match(this.jsdocType === 'type')(
     match(this.jsType)(function() {
-        var res = '';
+            var res = '';
 
-        this.description &&
-            (res += apply({ block : 'para', content : this.description }));
+            if(this.jsType !== 'Function') {
+                // `Function`'s signature will be processed within `jsType === 'Function'`
+                var objectSign = apply('signature');
+                res += apply({ block : 'headline', mods : { level : this.depth }, content : objectSign });
+            }
 
-        this.jsValue &&
-            (res += apply({ block : 'para', content : 'Value: "' + this.jsValue + '"' }));
+            this.description &&
+                (res += apply({ block : 'para', content : this.description }));
 
-        return res;
-    }),
-    match(this.jsType === 'Object')(function() {
+            this.jsValue &&
+                (res += apply({ block : 'para', content : 'Value: "' + this.jsValue + '"' }));
+
+            return res;
+        },
+        match(function() { return this.classes && this.classes.hasOwnProperty(this.jsType) })(function() {
+            log('⇢ type (custom classes)', this.jsType, '@depth', this.depth);
+            return apply(this.classes[this.jsType]);
+        })
+    ),
+    match(this.jsType === 'Object', this.props)(function() {
         var res = '';
 
         this.props.forEach(function(ctx) {
-            var val = ctx.val,
-                valJsdocType = val.jsdocType;
+            local({ props : undefined })(function() {
+                var val = ctx.val,
+                    valJsdocType = val.jsdocType;
 
-            if(valJsdocType === 'class') {
-                res += apply(val);
-                return;
-            }
+                if(valJsdocType === 'class') {
+                    res += apply(val);
+                    return;
+                }
 
-            var depth = this.depth;
-            if(val.jsType !== 'Function') {
-                // `Function`'s signature will be processed within `jsType === 'Function'`
-                var propSign = apply('signature', val, { name : ctx.key });
-                res += apply({ block : 'headline', mods : { level : depth }, content : propSign });
-                depth++;
-            }
-
-            res += apply({ name : ctx.key, depth : depth }, val);
+                res += apply({ name : ctx.key }, val);
+            });
         }, this);
 
         return res;
@@ -142,13 +171,13 @@ match(this.jsdocType === 'type')(
 
         this.description && (res += apply({ block : 'para', content : this.description }));
 
-        var depth = this.depth + 1,
-            params = this.params,
-            returns = this.returns;
+        var params = this.params,
+            returns = this.returns,
+            depth = this.depth + 1;
 
         if(params) {
             res += apply({ block : 'headline', mods : { level : depth }, content : 'Parameters:' });
-            params.forEach(function(ctx) { res += apply(ctx) });
+            params.forEach(function(ctx) { res += apply({ params : undefined }, ctx) });
             res += '\n';
         }
 
@@ -158,11 +187,11 @@ match(this.jsdocType === 'type')(
         }
 
         return res;
-    },
+    }),
     function() {
         log('⇢ type', this.jsType, '@depth', this.depth);
         return applyNext();
-    })
+    }
 );
 
 match(this.jsdocType === 'param')(
@@ -214,19 +243,34 @@ match(this._mode === 'signature')(
     }),
     match(this.jsdocType === 'type')(
         match(this.jsType)(function() {
-            return apply('jstype-name') + ' ' + apply('jstype-type');
+            var res = apply('jstype-name') || '',
+                type = apply('jstype-type'),
+                access = apply('jstype-access'),
+                readonly = apply('jstype-readonly');
+
+            return res +
+                (type? ' ' + type : '') +
+                (access? '  ' + access : '') +
+                (readonly? '  ' + readonly : '');
         }),
         match(this.jsType === 'Function')(function() {
             var res;
 
             Array.isArray(this.params) &&
-                (res = this.params.map(function(ctx) { return apply('signature', ctx) }).join(', '));
+                (res = this.params.map(function(ctx) {
+                    return apply('signature', { params : undefined }, ctx);
+                }).join(', '));
 
             res = (this.name || '<Function>') + ' (' + (res? ' ' + res + ' ' : '') + ')';
 
             this.returns && (res += ' → ' + apply('signature', this.returns, { name : undefined }));
 
-            return res;
+            var access = apply('jstype-access'),
+                readonly = apply('jstype-readonly');
+
+            return res +
+                (access? '  ' + access : '') +
+                (readonly? '  ' + readonly : '');
         })
     ),
     function() {
@@ -262,10 +306,20 @@ match(this._mode === 'jstype-type')(function() {
         '';
 });
 
+match(this._mode === 'jstype-access')(function() {
+    log('⇢ (jstype / access)');
+    return this.accessLevel;
+});
+
+match(this._mode === 'jstype-readonly')(function() {
+    log('⇢ (jstype / readonly)');
+    return this.isReadOnly? '(readonly)' : '';
+});
+
 // ---
 
 block('headline')(
-    function() { return '**' + this.content + '**\n\n' },
+    function() { return apply({ block : 'bold', content : this.content }) + '\n\n' },
     mod('level', 1)(function() { return '# ' + this.content + '\n\n' }),
     mod('level', 2)(function() { return '## ' + this.content + '\n\n' }),
     mod('level', 3)(function() { return '### ' + this.content + '\n\n' }),
@@ -275,6 +329,10 @@ block('headline')(
 );
 
 block('para')(function() { return this.content + '\n\n' });
+
+block('bold')(function() { return '**' + this.content + '**' });
+
+block('italic')(function() { return '*' + this.content + '*' });
 
 block('link')(function() {
     var res = this.url;
