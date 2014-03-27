@@ -263,7 +263,7 @@ match(this._mode === 'signature')(
                     return apply('signature', { params : undefined }, ctx);
                 }).join(', '));
 
-            res = (this.name || '<Function>') + ' (' + (res? ' ' + res + ' ' : '') + ')';
+            res = (this.name || '\<Function\>') + ' (' + (res? ' ' + res + ' ' : '') + ')';
 
             this.returns && (res += ' → ' + apply('signature', this.returns, { name : undefined }));
 
@@ -289,7 +289,7 @@ match(this._mode === 'jstype')(function() {
 match(this._mode === 'jstype-name')(function() {
     log('⇢ (jstype / name)');
 
-    if(!this.name) return '<Type>';
+    if(!this.name) return '\<Type\>';
 
     var res = this.name;
 
