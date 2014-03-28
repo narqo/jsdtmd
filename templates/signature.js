@@ -1,5 +1,3 @@
-module.exports = function() {
-
 mode('signature')(
     match(this.jsdocType === 'module')(function() {
         return this.name + ' Module';
@@ -87,5 +85,3 @@ mode('jstype-readonly')(function() {
     log('⇢ (jstype / readonly)');
     return this.isReadOnly? '(readonly)' : '';
 });
-
-};

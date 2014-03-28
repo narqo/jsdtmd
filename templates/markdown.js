@@ -1,5 +1,3 @@
-module.exports = function() {
-
 block('headline')(
     function() { return apply({ block : 'bold', content : this.content }) + '\n\n' },
     mod('level', 1)(function() { return '# '      + this.content + '\n\n' }),
@@ -38,5 +36,3 @@ block('olist')(function() {
 block('code')(function() {
     return '`' + this.content + '`';
 });
-
-};

@@ -1,5 +1,3 @@
-module.exports = function() {
-
 var log = console.error.bind(console);
 
 match(!this.jsdocType)(function() {
@@ -160,12 +158,9 @@ match(this.jsdocType === 'type')(
 
         if(params) {
             res += apply({ block : 'headline', mods : { level : depth }, content : 'Parameters:' });
-            local({ _lastParamName : undefined, _paramDepth : 1 })(function() {
-                params.forEach(function(ctx) {
-                    res += apply({ params : undefined }, ctx);
-                    this._lastParamName = ctx.name;
-                }, this);
-            });
+            params.forEach(function(ctx) {
+                res += apply({ params : undefined }, ctx);
+            }, this);
             res += '\n';
         }
 
@@ -198,17 +193,8 @@ match(this.jsdocType === 'param')(
         var res,
             name = this.name;
 
-//        if(this._lastParamName && name.indexOf(this._lastParamName + '.') === 0) {
-//            name = name.split('.')[this._paramDepth];
-//            this._paramDepth++;
-//        } else {
-//            this._paramDepth = 1;
-//        }
-
         res = applyNext({ name : name });
-        this.description && (res += '<br/>\n  ' +
-            (this._paramDepth > 1? Array(this._paramDepth).join('  ') : '')  +
-            this.description);
+        this.description && (res += '<br/>\n  ' + this.description);
 
         return apply({ block : 'ulist', mods : { level : this._paramDepth }, content : res });
     }
@@ -225,5 +211,3 @@ match(this.jsdocType === 'returns')(function() {
 
     return res;
 });
-
-};
