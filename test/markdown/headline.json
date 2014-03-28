@@ -1,0 +1,9 @@
+[{ "block": "headline", "content": "My header" },
+{ "block": "headline", "mods": { "level": 1 }, "content": "My header 1" },
+{ "block": "headline", "mods": { "level": 2 }, "content": "My header 2" },
+{ "block": "headline", "mods": { "level": 3 }, "content": "My header 3" },
+{ "block": "headline", "mods": { "level": 4 }, "content": "My header 4" },
+{ "block": "headline", "mods": { "level": 5 }, "content": "My header 5" },
+{ "block": "headline", "mods": { "level": 6 }, "content": "My header 6" },
+{ "block": "headline", "mods": { "level": 7 }, "content": "My header 7" },
+{ "block": "headline", "mods": { "level": 105 }, "content": "My header 105" }]

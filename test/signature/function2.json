@@ -1,0 +1,31 @@
+{
+    "jsdocType": "type",
+    "name": "setCookie",
+    "jsType": "Function",
+    "params": [
+        {
+            "jsdocType": "param",
+            "name": "name",
+            "description": "Cookie name to set",
+            "jsType": "String"
+        },
+        {
+            "jsdocType": "param",
+            "name": "val",
+            "description": "A value to set",
+            "jsType": "String"
+        },
+        {
+            "jsdocType": "param",
+            "name": "options",
+            "description": "Options",
+            "jsType": "Object"
+        }
+    ],
+    "returns": {
+        "jsdocType": "returns",
+        "description": "Same sort of class instance",
+        "jsType": "this"
+    },
+    "description": "Sets cookie by given name"
+}

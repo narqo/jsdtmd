@@ -1,0 +1,60 @@
+{
+    "jsdocType": "type",
+    "name": "foo",
+    "jsType": "Function",
+    "params": [
+        {
+            "jsdocType": "param",
+            "name": "decl",
+            "description": "Block name (simple syntax) or description",
+            "jsType": [
+                "String",
+                "Object"
+            ]
+        },
+        {
+            "jsdocType": "param",
+            "name": "decl.block|decl.name",
+            "description": "Block name",
+            "jsType": "String"
+        },
+        {
+            "jsdocType": "param",
+            "name": "decl.baseBlock",
+            "description": "Name of the parent block",
+            "jsType": "String",
+            "isOptional": true
+        },
+        {
+            "jsdocType": "param",
+            "name": "decl.baseMix",
+            "description": "Mixed block names",
+            "jsType": "Array",
+            "isOptional": true
+        },
+        {
+            "jsdocType": "param",
+            "name": "decl.modName",
+            "description": "Modifier name",
+            "jsType": "String",
+            "isOptional": true
+        },
+        {
+            "jsdocType": "param",
+            "name": "decl.modVal",
+            "description": "Modifier value",
+            "jsType": [
+                "String",
+                "Array"
+            ],
+            "isOptional": true
+        },
+        {
+            "jsdocType": "param",
+            "name": "props",
+            "description": "Methods",
+            "jsType": "Object",
+            "isOptional": true
+        }
+    ]
+}

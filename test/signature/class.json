@@ -1,0 +1,345 @@
+{
+    "jsdocType": "class",
+    "name": "BEM",
+    "description": "Base block for creating BEM blocks",
+    "augments": {
+        "jsdocType": "type",
+        "jsType": "events:Emitter"
+    },
+    "cons": {
+        "jsdocType": "type",
+        "jsType": "Function",
+        "accessLevel": "private",
+        "params": [
+            {
+                "jsdocType": "param",
+                "name": "mods",
+                "description": "Block modifiers",
+                "jsType": "Object"
+            },
+            {
+                "jsdocType": "param",
+                "name": "initImmediately",
+                "description": "",
+                "jsType": "Boolean",
+                "isOptional": true,
+                "default": "true"
+            }
+        ]
+    },
+    "proto": {
+        "jsdocType": "type",
+        "jsType": "Object",
+        "props": [
+            {
+                "key": "isDefaultPrevented",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "Boolean"
+                    },
+                    "description": "Returns whether is default action prevented"
+                }
+            },
+            {
+                "key": "stopPropagation",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "description": "Stops propagation"
+                }
+            }
+        ]
+    },
+    "members": {
+        "jsdocType": "type",
+        "jsType": "Object",
+        "props": [
+            {
+                "key": "type",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "String",
+                    "description": "Type"
+                }
+            }
+        ]
+    },
+    "static": {
+        "jsdocType": "type",
+        "jsType": "Object",
+        "props": [
+            {
+                "key": "blocks",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Object",
+                    "description": "Storage for block declarations (hash by block name)"
+                }
+            },
+            {
+                "key": "decl",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "params": [
+                        {
+                            "jsdocType": "param",
+                            "name": "decl",
+                            "description": "Block name (simple syntax) or description",
+                            "jsType": [
+                                "String",
+                                "Object"
+                            ]
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "decl.block|decl.name",
+                            "description": "Block name",
+                            "jsType": "String"
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "decl.baseBlock",
+                            "description": "Name of the parent block",
+                            "jsType": "String",
+                            "isOptional": true
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "decl.baseMix",
+                            "description": "Mixed block names",
+                            "jsType": "Array",
+                            "isOptional": true
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "decl.modName",
+                            "description": "Modifier name",
+                            "jsType": "String",
+                            "isOptional": true
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "decl.modVal",
+                            "description": "Modifier value",
+                            "jsType": [
+                                "String",
+                                "Array"
+                            ],
+                            "isOptional": true
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "props",
+                            "description": "Methods",
+                            "jsType": "Object",
+                            "isOptional": true
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "staticProps",
+                            "description": "Static methods",
+                            "jsType": "Object",
+                            "isOptional": true
+                        }
+                    ],
+                    "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "Function"
+                    },
+                    "description": "Declares blocks and creates a block class"
+                }
+            },
+            {
+                "key": "_processLive",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "accessLevel": "private",
+                    "params": [
+                        {
+                            "jsdocType": "param",
+                            "name": "heedLive",
+                            "description": "Whether to take into account that the block already processed its live properties",
+                            "jsType": "Boolean",
+                            "isOptional": true,
+                            "default": "false"
+                        }
+                    ],
+                    "returns": {
+                        "jsdocType": "returns",
+                        "description": "Whether the block is a live block",
+                        "jsType": "Boolean"
+                    },
+                    "description": "Processes a block's live properties"
+                }
+            },
+            {
+                "key": "create",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "params": [
+                        {
+                            "jsdocType": "param",
+                            "name": "block",
+                            "description": "Block name or description",
+                            "jsType": [
+                                "String",
+                                "Object"
+                            ]
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "params",
+                            "description": "Block parameters",
+                            "jsType": "Object",
+                            "isOptional": true
+                        }
+                    ],
+                    "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "BEM"
+                    },
+                    "description": "Factory method for creating an instance of the block named"
+                }
+            },
+            {
+                "key": "getName",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "String"
+                    },
+                    "description": "Returns the name of the current block"
+                }
+            },
+            {
+                "key": "on",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "params": [
+                        {
+                            "jsdocType": "param",
+                            "name": "e",
+                            "description": "Event type",
+                            "jsType": [
+                                "String",
+                                "Object"
+                            ]
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "data",
+                            "description": "Additional data that the handler gets as e.data",
+                            "jsType": "Object",
+                            "isOptional": true
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "fn",
+                            "description": "Handler",
+                            "jsType": "Function"
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "ctx",
+                            "description": "Handler context",
+                            "jsType": "Object",
+                            "isOptional": true
+                        }
+                    ],
+                    "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "this"
+                    },
+                    "description": "Adds an event handler"
+                }
+            },
+            {
+                "key": "un",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "params": [
+                        {
+                            "jsdocType": "param",
+                            "name": "e",
+                            "description": "Event type",
+                            "jsType": [
+                                "String",
+                                "Object"
+                            ],
+                            "isOptional": true
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "fn",
+                            "description": "Handler",
+                            "jsType": "Function",
+                            "isOptional": true
+                        },
+                        {
+                            "jsdocType": "param",
+                            "name": "ctx",
+                            "description": "Handler context",
+                            "jsType": "Object",
+                            "isOptional": true
+                        }
+                    ],
+                    "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": "this"
+                    },
+                    "description": "Removes event handler or handlers"
+                }
+            },
+            {
+                "key": "_extractElemNameFrom",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "accessLevel": "private",
+                    "params": [
+                        {
+                            "jsdocType": "param",
+                            "name": "elem",
+                            "description": "Nested element",
+                            "jsType": "Object"
+                        }
+                    ],
+                    "returns": {
+                        "jsdocType": "returns",
+                        "description": "",
+                        "jsType": [
+                            "String",
+                            "undefined"
+                        ]
+                    },
+                    "description": "Retrieves the name of an element nested in a block"
+                }
+            },
+            {
+                "key": "_runInitFns",
+                "val": {
+                    "jsdocType": "type",
+                    "jsType": "Function",
+                    "accessLevel": "private",
+                    "description": "Executes the block init functions"
+                }
+            }
+        ]
+    }
+}

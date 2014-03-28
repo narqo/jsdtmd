@@ -1,0 +1,19 @@
+{
+    "jsdocType": "type",
+    "jsType": "Function",
+    "params": [
+        {
+            "jsdocType": "param",
+            "name": "name",
+            "jsType": "String"
+        }
+    ],
+    "returns": {
+        "jsdocType": "returns",
+        "jsType": [
+            "String",
+            "null"
+        ]
+    },
+    "description": "Returns cookie by given name"
+}

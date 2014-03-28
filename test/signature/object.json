@@ -1,0 +1,6 @@
+{
+    "jsdocType": "type",
+    "name": "target",
+    "description": "object to extend",
+    "jsType": "Object"
+}
