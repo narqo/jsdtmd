@@ -23,45 +23,60 @@ mode('signature')(
                 (access? ' ' + access : '') +
                 (readonly? ' ' + readonly : '');
         }),
-        match(this.jsType === 'Function')(function() {
-            var res;
+        match(this.jsType === 'Function')(
+            match(function() { return Array.isArray(this.params) })(function() {
+                var namesSep = /^([^\|\s]+)\s*\|.*/,
+                    res = [apply('signature', { params : undefined }, this.params[0])];
 
-            Array.isArray(this.params) &&
-                (res = this.params.map(function(ctx) {
-                    return apply('signature', { params : undefined }, ctx);
-                }).join(', '));
+                this.params.reduce(function(param1, param2) {
+                    var name1 = param1.name,
+                        name2 = param2.name;
 
-            res = (this.name || '\\<Function\\>') + ' (' + (res? ' ' + res + ' ' : '') + ')';
+                    if(!name1 || !name2) return param2;
 
-            this.returns && (res += ' → ' + apply('signature', { name : undefined }, this.returns));
+                    name1 = name1.replace(namesSep, '$1');
+                    name2 = name2.replace(namesSep, '$1');
 
-            var access = apply('jstype-access'),
-                readonly = apply('jstype-readonly');
+                    // check for nested `@param` tags like `decl` and `decl.block`
+                    if(name2.indexOf(name1 + '.') !== 0) {
+                        res.push(apply('signature', { params : undefined }, param2));
+                        return param2;
+                    }
 
-            return res +
-                (access? '  ' + access : '') +
-                (readonly? '  ' + readonly : '');
-        })
+                    return param1;
+                });
+
+                return res.join(', ');
+            }),
+            function() {
+                var res = this.params? (' ' + applyNext() + ' ') : '';
+                res = (this.name || '*function*') + ' (' + res + ')';
+
+                this.returns && (res += ' → ' + apply('signature', { name : undefined }, this.returns));
+
+                var access = apply('jstype-access'),
+                    readonly = apply('jstype-readonly');
+
+                return res +
+                    (access? '  ' + access : '') +
+                    (readonly? '  ' + readonly : '');
+            }
+        )
     ),
     function() {
-        log('⇢', this.jsdocType, '(signature)', '@depth', this.depth);
+        log('⇢', this.jsdocType, '(signature)', '@depth', this._depth);
         return applyNext();
     }
 );
 
-mode('jstype')(function() {
-    log('⇢ (jstype)');
-    return apply('jstype-type') + ' ' + apply('jstype-name');
-});
-
 mode('jstype-name')(function() {
     log('⇢ (jstype / name)');
 
-    if(!this.name) return '\\<Type\\>';
+    if(!this.name) return '*type*';
 
     var res = this.name;
     this.default && (res = res + '=' + this.default);
-    res.indexOf('|') !== -1 && (res = res.replace(/\s*\|\s*/g, ' | '));
+    res.indexOf('|') === -1 || (res = res.replace(/\s*\|\s*/g, ' | '));
     this.isOptional && (res = '[' + res + ']');
 
     return res;

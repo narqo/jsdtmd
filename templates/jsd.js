@@ -71,29 +71,60 @@ match(this.jsdocType === 'class')(function() {
 
     this.description && (res += apply({ block : 'para', content : this.description }));
 
-    var clsCons = this.cons,
-        clsProto = this.proto,
-        clsStatic = this.static,
-        clsMembers = this.members;
+    var clsStatic = this.static,
+        nestedDepth = depth + 1,
+        resBuf = '';
 
-    if(clsCons) {
-        res += apply({ block : 'headline', mods : { level : depth }, content : 'Constructor' });
-        res += apply({ name : this.name, _depth : depth + 1 }, clsCons);
+    if(this.cons) {
+        resBuf = apply({ name : this.name, _depth : nestedDepth }, this.cons);
+        if(resBuf) {
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Constructor' }) + resBuf;
+            resBuf = '';
+        }
     }
 
-    if(clsMembers) {
-        res += apply({ block : 'headline', mods : { level : depth }, content : 'Properties:' });
-        res += apply(clsMembers, { _depth : depth + 1 });
+    if(this.members) {
+        resBuf = apply(this.members, { _depth : nestedDepth });
+        if(resBuf) {
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Instance properties:' }) + resBuf;
+            resBuf = '';
+        }
     }
 
-    if(clsProto) {
-        res += apply({ block : 'headline', mods : { level : depth }, content : 'Methods:' });
-        res += apply(clsProto, { _depth : depth + 1 });
+    if(this.proto) {
+        resBuf = apply(this.proto, { _depth : nestedDepth });
+        if(resBuf) {
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Instance methods:' }) + resBuf;
+            resBuf = '';
+        }
     }
 
     if(clsStatic) {
-        res += apply({ block : 'headline', mods : { level : depth }, content : 'Static:' });
-        res += apply(clsStatic, { _depth : depth + 1 });
+        var clsPropsBuf = '',
+            clsMethodsBuf = '';
+
+        if(clsStatic.jsType === 'Object' && clsStatic.props) {
+            clsStatic.props.forEach(function(prop) {
+                var _res = apply({
+                        _depth : nestedDepth,
+                        jsdocType : clsStatic.jsdocType,
+                        jsType : clsStatic.jsType
+                    }, prop);
+                prop.val && prop.val.jsType === 'Function'?
+                    clsMethodsBuf += _res :
+                    clsPropsBuf += _res;
+            });
+        }
+
+        if(clsPropsBuf) {
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Static properties:' });
+            res += clsPropsBuf;
+        }
+
+        if(clsMethodsBuf) {
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Static methods:' });
+            res += clsMethodsBuf;
+        }
     }
 
     return res;
@@ -125,30 +156,31 @@ match(this.jsdocType === 'type')(
             return apply(this.classes[this.jsType]);
         })
     ),
-    match(this.jsType === 'Object', this.props)(function() {
-        var res = '';
-
-        this.props.forEach(function(ctx) {
-            local({ props : undefined })(function() {
-                var val = ctx.val,
-                    valJsdocType = val.jsdocType;
-
-                if(valJsdocType === 'class') {
-                    res += apply(val);
-                    return;
-                }
-
-                res += apply({ name : ctx.key }, val);
+    match(this.jsType === 'Object')(
+        match(this.key && this.val)(function() {
+            var val = this.val;
+            return val.jsdocType === 'class'?
+                apply(val) :
+                apply({ name : this.key, key : undefined, val : undefined }, val);
+        }),
+        match(this.props)(function() {
+            var res = '';
+            this.props.forEach(function(ctx) {
+                res += apply({ props : undefined }, ctx);
             });
-        });
-
-        return res;
-    }),
+            return res;
+        })
+    ),
     match(this.jsType === 'Function')(function() {
-        var res = '',
-            funcSing = apply('signature');
+        if(this.accessLevel === 'private') {
+            log('⇢ type Function (skip private)', this.name);
+            return '';
+        }
 
-        res += apply({ block : 'headline', mods : { level : this._depth }, content : funcSing });
+        var res = '',
+            funcSign = apply('signature');
+
+        res += apply({ block : 'headline', mods : { level : this._depth }, content : funcSign });
 
         this.description && (res += apply({ block : 'para', content : this.description }));
 
