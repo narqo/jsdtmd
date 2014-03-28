@@ -1,0 +1,42 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "loader_type_bundle",
+      "description": "Load BEM bundle (JS+CSS) from external URL.",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Function",
+        "params": [
+          {
+            "jsdocType": "param",
+            "name": "id",
+            "description": "",
+            "jsType": "String"
+          },
+          {
+            "jsdocType": "param",
+            "name": "url",
+            "description": "",
+            "jsType": "String"
+          },
+          {
+            "jsdocType": "param",
+            "name": "onSuccess",
+            "description": "",
+            "jsType": "Function"
+          },
+          {
+            "jsdocType": "param",
+            "name": "onError",
+            "description": "",
+            "jsType": "Function",
+            "isOptional": true
+          }
+        ],
+        "description": "Loads bundle"
+      }
+    }
+  ]
+}

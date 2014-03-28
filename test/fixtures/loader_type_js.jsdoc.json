@@ -1,0 +1,28 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "loader_type_js",
+      "description": "Load JS from external URL.",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Function",
+        "params": [
+          {
+            "jsdocType": "param",
+            "name": "path",
+            "description": "resource link",
+            "jsType": "String"
+          },
+          {
+            "jsdocType": "param",
+            "name": "callback",
+            "description": "executes when resource is loaded",
+            "jsType": "Function"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "jsdocType": "root",
+  "modules": [
+    {
+      "jsdocType": "module",
+      "name": "functions__debounce",
+      "exports": {
+        "jsdocType": "type",
+        "jsType": "Function",
+        "params": [
+          {
+            "jsdocType": "param",
+            "name": "fn",
+            "description": "function to debounce",
+            "jsType": "Function"
+          },
+          {
+            "jsdocType": "param",
+            "name": "timeout",
+            "description": "debounce interval",
+            "jsType": "Number"
+          },
+          {
+            "jsdocType": "param",
+            "name": "invokeAsap",
+            "description": "invoke before first interval",
+            "jsType": "Boolean",
+            "isOptional": true,
+            "default": "false"
+          },
+          {
+            "jsdocType": "param",
+            "name": "ctx",
+            "description": "context of function invocation",
+            "jsType": "Object",
+            "isOptional": true
+          }
+        ],
+        "returns": {
+          "jsdocType": "returns",
+          "description": "debounced function",
+          "jsType": "Function"
+        },
+        "description": "Debounces given function"
+      }
+    }
+  ]
+}
