@@ -3,7 +3,6 @@
 var fs = require('fs'),
     path = require('path'),
     jsdtmd = require('../lib/jsdtmd'),
-    TESTS_DIR = path.resolve(__dirname, '../test'),
     onlyFile = process.argv[2];
 
 if(onlyFile) {
@@ -24,11 +23,10 @@ process.stdin.on('end', function(data) {
     }
 });
 
-//processDir(path.resolve(TESTS_DIR, 'fixtures'));
-
 function generateMD(data) {
     var md = jsdtmd(data);
-    console.log('---\n%s', md.toString());
+    console.log(md);
+    //console.log('---\n%s', md.toString());
 }
 
 function processFile(filePath) {
@@ -50,10 +48,6 @@ function processDir(dirPath) {
 }
 
 function load(file) {
-    console.log('load %s\n', file);
+    //console.log('load %s\n', file);
     return JSON.parse(fs.readFileSync(file, 'utf8'));
-}
-
-function save(file, data) {
-    fs.writeFileSync(path.join(TESTS_DIR, file.replace('.jsdoc.json', '.md')), data);
 }
