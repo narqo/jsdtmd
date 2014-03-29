@@ -1,4 +1,4 @@
-var log = console.error.bind(console);
+var log = function() {}; //console.error.bind(console);
 
 match(!this.jsdocType)(function() {
     log('⇢ ANY');

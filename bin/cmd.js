@@ -1,24 +1,35 @@
+#!/usr/bin/env node
+
 var fs = require('fs'),
     path = require('path'),
-    loader = require('./loader.js'),
+    jsdtmd = require('../lib/jsdtmd'),
     TESTS_DIR = path.resolve(__dirname, '../test'),
-    TMPL_DIR = path.resolve(__dirname, '../templates'),
-    TMPL_LISTS = [
-        'jsd.js',
-        'signature.js',
-        'markdown.js',
-        'main.js'
-    ],
-    tmplStr = TMPL_LISTS.map(function(file) {
-        var fPath = path.resolve(TMPL_DIR, file);
-        return loader.parse(fs.readFileSync(fPath, 'utf8'));
-    }).join('\n'),
-    jsdtmd = loader.compile(tmplStr),
     onlyFile = process.argv[2];
 
-onlyFile?
-    processFile(onlyFile) :
-    processDir(path.resolve(TESTS_DIR, 'fixtures'));
+if(onlyFile) {
+    processFile(onlyFile);
+    return;
+}
+
+var buf = '';
+process.stdin.on('readable', function() {
+    var chunk = process.stdin.read();
+    chunk === null || (buf += chunk.toString('utf8'));
+});
+
+process.stdin.on('end', function(data) {
+    data && (buf += data);
+    if(buf.charAt(0) === '[' || buf.charAt(0) === '{') {
+        generateMD(JSON.parse(buf));
+    }
+});
+
+//processDir(path.resolve(TESTS_DIR, 'fixtures'));
+
+function generateMD(data) {
+    var md = jsdtmd(data);
+    console.log('---\n%s', md.toString());
+}
 
 function processFile(filePath) {
     var file = path.resolve(filePath),
@@ -27,7 +38,7 @@ function processFile(filePath) {
     if(fileStat.isDirectory()) return processDir(file);
     else if(!fileStat.isFile()) throw 'not a file';
 
-    compile(load(file));
+    generateMD(load(file));
 }
 
 function processDir(dirPath) {
@@ -41,12 +52,6 @@ function processDir(dirPath) {
 function load(file) {
     console.log('load %s\n', file);
     return JSON.parse(fs.readFileSync(file, 'utf8'));
-}
-
-function compile(json) {
-    var md = jsdtmd.apply(json);
-    console.log('\n---\n%s', md.toString());
-    return md;
 }
 
 function save(file, data) {

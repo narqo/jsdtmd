@@ -2,14 +2,20 @@
   "name": "jsdtmd",
   "version": "0.0.1",
   "description": "",
-  "main": "lib/index.js",
+  "main": "lib/jsdtmd.js",
+  "bin": {
+    "jsdtmd": "bin/cmd.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "jsdoc": "node -p \"JSON.stringify(require('bem-jsd')(require('fs').readFileSync('./lib/jsdtmd.js', 'utf8')), null, 2)\" | ./bin/cmd.js"
   },
   "author": "Vladimir Varankin <nek.narqo@gmail.com> (http://github.com/narqo)",
   "license": "WTFPL",
   "dependencies": {
-    "bem-jsd": "~1.3.1",
     "bem-xjst": "~0.6.0"
+  },
+  "devDependencies": {
+    "bem-jsd": "^1.3.1"
   }
 }
