@@ -29,10 +29,10 @@ to Markdown string.
 
 {String}
 
-## Related projects:
+## Related projects
 
 - [bem-jsd](http://github.com/bem/bem-jsd) — wrapper for yet another JSDoc parser
-- [bem-xjst](http://github.com/bem/bem-xjst) — XJST-based
+- [bem-xjst](http://github.com/bem/bem-xjst) — XJST-based compiler
 
 ## License
 
