@@ -76,7 +76,11 @@ match(this.jsdocType === 'class')(function() {
     if(this.cons) {
         resBuf = apply({ name : this.name, _depth : nestedDepth }, this.cons);
         if(resBuf) {
-            res += apply({ block : 'headline', mods : { level : depth }, content : 'Constructor' }) + resBuf;
+            res += apply({
+                block : 'headline',
+                mods : { level : depth },
+                content : 'Constructor'
+            }) + resBuf;
             resBuf = '';
         }
     }
@@ -84,7 +88,11 @@ match(this.jsdocType === 'class')(function() {
     if(this.members) {
         resBuf = apply(this.members, { _depth : nestedDepth });
         if(resBuf) {
-            res += apply({ block : 'headline', mods : { level : depth }, content : 'Instance properties:' }) + resBuf;
+            res += apply({
+                block : 'headline',
+                mods : { level : depth },
+                content : 'Instance properties:'
+            }) + resBuf;
             resBuf = '';
         }
     }
@@ -170,11 +178,6 @@ match(this.jsdocType === 'type')(
         })
     ),
     match(this.jsType === 'Function')(function() {
-        if(this.accessLevel === 'private') {
-            this.log('type Function (skip private)', this.name);
-            return '';
-        }
-
         var res = '',
             funcSign = apply('signature');
 
@@ -200,6 +203,10 @@ match(this.jsdocType === 'type')(
         }
 
         return res;
+    }),
+    match(this.accessLevel === 'private')(function() {
+        this.log('type', this.jsType, '(skip private)', this.name);
+        return '';
     }),
     function() {
         this.log('type', this.jsType, '@depth', this._depth);
