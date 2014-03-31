@@ -64,13 +64,13 @@ mode('signature')(
         )
     ),
     function() {
-        log('⇢', this.jsdocType, '(signature)', '@depth', this._depth);
+        this.log(this.jsdocType, '(signature)', '@depth', this._depth);
         return applyNext();
     }
 );
 
 mode('jstype-name')(function() {
-    log('⇢ (jstype / name)');
+    this.log('(jstype / name)');
 
     if(!this.name) return '*type*';
 
@@ -83,7 +83,7 @@ mode('jstype-name')(function() {
 });
 
 mode('jstype-type')(function() {
-    log('⇢ (jstype / type)');
+    this.log('(jstype / type)');
 
     var jsType = this.jsType;
     return jsType?
@@ -92,11 +92,11 @@ mode('jstype-type')(function() {
 });
 
 mode('jstype-access')(function() {
-    log('⇢ (jstype / access)');
+    this.log('(jstype / access)');
     return this.accessLevel;
 });
 
 mode('jstype-readonly')(function() {
-    log('⇢ (jstype / readonly)');
+    this.log('(jstype / readonly)');
     return this.isReadOnly? '(readonly)' : '';
 });
