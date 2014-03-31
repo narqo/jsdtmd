@@ -5,7 +5,7 @@ mode('signature')(
     match(this.jsdocType === 'class')(function() {
         return this.name + ' Class';
     }),
-    match(this.jsdocType === 'param')(function() {
+    match(this.jsdocType === 'param' || this.jsdocType === 'event')(function() {
         return apply('jstype-name');
     }),
     match(this.jsdocType === 'returns')(function() {

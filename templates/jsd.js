@@ -91,7 +91,7 @@ match(this.jsdocType === 'class')(function() {
             res += apply({
                 block : 'headline',
                 mods : { level : depth },
-                content : 'Instance properties:'
+                content : 'Instance properties'
             }) + resBuf;
             resBuf = '';
         }
@@ -100,7 +100,11 @@ match(this.jsdocType === 'class')(function() {
     if(this.proto) {
         resBuf = apply(this.proto, { _depth : nestedDepth });
         if(resBuf) {
-            res += apply({ block : 'headline', mods : { level : depth }, content : 'Instance methods:' }) + resBuf;
+            res += apply({
+                block : 'headline',
+                mods : { level : depth },
+                content : 'Instance methods'
+            }) + resBuf;
             resBuf = '';
         }
     }
@@ -123,13 +127,27 @@ match(this.jsdocType === 'class')(function() {
         }
 
         if(clsPropsBuf) {
-            res += apply({ block : 'headline', mods : { level : depth }, content : 'Static properties:' });
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Static properties' });
             res += clsPropsBuf;
         }
 
         if(clsMethodsBuf) {
-            res += apply({ block : 'headline', mods : { level : depth }, content : 'Static methods:' });
+            res += apply({ block : 'headline', mods : { level : depth }, content : 'Static methods' });
             res += clsMethodsBuf;
+        }
+    }
+
+    if(this.events) {
+        this.events.forEach(function(ctx) {
+            resBuf += apply(ctx, { _depth : nestedDepth, events : undefined });
+        });
+        if(resBuf) {
+            res += apply({
+                block : 'headline',
+                mods : { level : depth },
+                content : 'Events'
+            }) + resBuf;
+            resBuf = '';
         }
     }
 
@@ -233,7 +251,7 @@ match(this.jsdocType === 'param')(
         res = applyNext({ name : name });
         this.description && (res += '<br/>\n  ' + this.description);
 
-        return apply({ block : 'ulist', mods : { level : this._paramDepth }, content : res });
+        return apply({ block : 'ulist', content : res });
     }
 );
 
@@ -245,6 +263,27 @@ match(this.jsdocType === 'returns')(function() {
 
     this.description &&
         (res += apply({ block : 'para', content : this.description }));
+
+    return res;
+});
+
+match(this.jsdocType === 'event')(function() {
+    this.log('event', '@depth', this._depth);
+
+    var depth = this._depth,
+        evtSign = applyNext('signature'),
+        res = apply({ block : 'headline', mods : { level : depth }, content : evtSign });
+
+    this.description && (res += apply({ block : 'para', content : this.description }));
+
+    var params = this.params;
+    if(params) {
+        res += apply({ block : 'headline', mods : { level : depth }, content : 'Event Payload:' });
+        params.forEach(function(ctx) {
+            res += apply({ params : undefined }, ctx);
+        }, this);
+        res += '\n';
+    }
 
     return res;
 });
