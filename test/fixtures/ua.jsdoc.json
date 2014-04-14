@@ -1,0 +1,26 @@
+{
+  "jsdocType": "root",
+  "files": [
+    {
+      "jsdocType": "file",
+      "description": "desktop.blocks/ua/ua.js",
+      "modules": [
+        {
+          "jsdocType": "module",
+          "name": "ua",
+          "see": [
+            "http://code.jquery.com/jquery-migrate-1.1.1.js",
+            "http://code.jquery.com",
+            "//code.jquery.com",
+            "Official jQuery project web site"
+          ],
+          "description": "Detect some user agent features (works like jQuery.browser in jQuery 1.8)",
+          "exports": {
+            "jsdocType": "type",
+            "jsType": "Object"
+          }
+        }
+      ]
+    }
+  ]
+}

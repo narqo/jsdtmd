@@ -1,4 +1,7 @@
 mode('signature')(
+    match(this.jsdocType === 'file' && this._filePath)(function() {
+        return this._filePath;
+    }),
     match(this.jsdocType === 'module')(function() {
         return this.name + ' Module';
     }),
