@@ -10,23 +10,38 @@ match(function() { return Array.isArray(this) })(function() {
     return res;
 });
 
-match(this.jsdocType === 'root')(
+match(this.jsdocType)(
     function() {
-        // Fallback if no modules exports
+        // Fallback if nothing was exported
         return '';
     },
+    match(this.files)(function() {
+        var res = '';
+        this.files.forEach(function(ctx) {
+            res += apply({ _depth : this._depth + 1, files : undefined }, ctx);
+        }, this);
+        return res;
+    }),
     match(this.modules)(function() {
         var res = '';
         this.modules.forEach(function(ctx) {
             res += apply({ _depth : this._depth + 1, modules : undefined }, ctx);
         }, this);
         return res;
-    }),
+    })
+);
+
+match(this.jsdocType === 'root')(
     function() {
         this.log('root');
         return applyNext();
     }
 );
+
+match(this.jsdocType === 'file')(function() {
+    this.log('file', '@depth', this._depth);
+    return applyNext({ _filePath : this.description });
+});
 
 match(this.jsdocType === 'module')(function() {
     this.log('module', '@depth', this._depth);
@@ -42,6 +57,11 @@ match(this.jsdocType === 'module')(function() {
         description : undefined
     })(function() {
         var _res = '';
+
+        if(this._filePath) {
+            var pathSign = apply('signature', { jsdocType : 'file' });
+            _res += apply({ block : 'para', content : 'Defined in: ' + pathSign });
+        }
 
         this._moduleDesc && (_res += apply({ block : 'para', content : this._moduleDesc }));
         this.exports && (_res += apply(this.exports));
