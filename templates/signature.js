@@ -103,3 +103,12 @@ mode('jstype-readonly')(function() {
     this.log('(jstype / readonly)');
     return this.isReadOnly? '(readonly)' : '';
 });
+
+mode('see')(function() {
+    this.log('(see)');
+    return this.see.map(function(link) {
+        return link.match('^(?:https?:)?//')?
+            apply({ block : 'link', url : link, content : link }) :
+            link;
+    });
+});

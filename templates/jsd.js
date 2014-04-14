@@ -64,6 +64,16 @@ match(this.jsdocType === 'module')(function() {
         }
 
         this._moduleDesc && (_res += apply({ block : 'para', content : this._moduleDesc }));
+
+        if(this.see) {
+            var links = apply('see', this.see);
+            _res += apply({ block : 'para', content : 'See:' });
+            links.forEach(function(link) {
+                _res += apply({ block : 'ulist', content : link });
+            });
+            _res += '\n';
+        }
+
         this.exports && (_res += apply(this.exports));
 
         res += _res;
