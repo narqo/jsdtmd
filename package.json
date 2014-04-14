@@ -1,6 +1,6 @@
 {
   "name": "jsdtmd",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Made for profit opinionated JSDoc to Markdown converter",
   "main": "lib/jsdtmd.js",
   "bin": {
