@@ -8,6 +8,26 @@ mode('signature')(
     match(this.jsdocType === 'class')(function() {
         return this.name + ' Class';
     }),
+    match(this.jsdocType === 'bem')(function() {
+        var modName = this.modName,
+            modVal = this.modVal,
+            elem = this.elem;
+
+        if(!elem && !modName) return this.block + ' Block';
+
+        var res = this.block;
+
+        elem && (res += '__' + elem);
+
+        if(modName) {
+            res += '_' + modName;
+            if(modVal) {
+                res += '_' + modVal;
+            }
+        }
+
+        return res;
+    }),
     match(this.jsdocType === 'param' || this.jsdocType === 'event')(function() {
         return apply('jstype-name');
     }),

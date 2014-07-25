@@ -1,0 +1,77 @@
+{"jsdocType" : "root", "modules" : [
+    {
+        "jsdocType" : "module",
+        "name" : "menu-item",
+        "exports" : {
+            "jsdocType" : "class",
+            "name" : "menu-item",
+            "proto" : {
+                "jsdocType" : "type",
+                "jsType" : "Object",
+                "props" : [
+                    {
+                        "key" : "isValEq",
+                        "val" : {
+                            "jsdocType" : "type",
+                            "jsType" : "Function",
+                            "params" : [
+                                {
+                                    "jsdocType" : "param",
+                                    "name" : "val",
+                                    "description" : "",
+                                    "jsType" : "*"
+                                }
+                            ],
+                            "returns" : {
+                                "jsdocType" : "returns",
+                                "description" : "",
+                                "jsType" : "Boolean"
+                            },
+                            "description" : "Checks whether given value is equal to current value"
+                        }
+                    },
+                    {
+                        "key" : "getVal",
+                        "val" : {
+                            "jsdocType" : "type",
+                            "jsType" : "Function",
+                            "returns" : {
+                                "jsdocType" : "returns",
+                                "description" : "",
+                                "jsType" : "*"
+                            },
+                            "description" : "Returns item value"
+                        }
+                    },
+                    {
+                        "key" : "getText",
+                        "val" : {
+                            "jsdocType" : "type",
+                            "jsType" : "Function",
+                            "returns" : {
+                                "jsdocType" : "returns",
+                                "description" : "",
+                                "jsType" : "String"
+                            },
+                            "description" : "Returns item text"
+                        }
+                    }
+                ]
+            },
+            "bem" : {
+                "jsdocType" : "bem",
+                "block" : "menu-item",
+                "modName" : "type",
+                "modVal" : "radio",
+                "params" : [
+                    {
+                        "jsdocType" : "param",
+                        "name" : "val",
+                        "description" : "Value of item",
+                        "jsType" : "*"
+                    }
+                ]
+            }
+        }
+    }
+]}

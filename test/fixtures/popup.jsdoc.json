@@ -1,0 +1,314 @@
+{"jsdocType" : "root", "modules" : [
+    {
+        "jsdocType" : "module",
+        "name" : "popup",
+        "exports" : {
+            "jsdocType" : "class",
+            "name" : "popup",
+            "proto" : {
+                "jsdocType" : "type",
+                "jsType" : "Object",
+                "props" : [
+                    {
+                        "key" : "setTarget",
+                        "val" : {
+                            "jsdocType" : "type",
+                            "jsType" : "Function",
+                            "params" : [
+                                {
+                                    "jsdocType" : "param",
+                                    "name" : "left",
+                                    "description" : "x-coordinate or owner DOM elem or owner BEMDOM block",
+                                    "jsType" : ["Number", "jQuery", "BEMDOM"]
+                                },
+                                {
+                                    "jsdocType" : "param",
+                                    "name" : "top",
+                                    "description" : "y-coordinate",
+                                    "jsType" : "Number",
+                                    "isOptional" : true
+                                }
+                            ],
+                            "returns" : {
+                                "jsdocType" : "returns",
+                                "description" : "this",
+                                "jsType" : "popup"
+                            },
+                            "description" : "Sets target"
+                        }
+                    },
+                    {
+                        "key" : "setContent",
+                        "val" : {
+                            "jsdocType" : "type",
+                            "jsType" : "Function",
+                            "params" : [
+                                {
+                                    "jsdocType" : "param",
+                                    "name" : "content",
+                                    "description" : "",
+                                    "jsType" : ["String", "jQuery"]
+                                }
+                            ],
+                            "returns" : {
+                                "jsdocType" : "returns",
+                                "description" : "this",
+                                "jsType" : "popup"
+                            },
+                            "description" : "Sets content"
+                        }
+                    },
+                    {
+                        "key" : "redraw",
+                        "val" : {
+                            "jsdocType" : "type",
+                            "jsType" : "Function",
+                            "returns" : {
+                                "jsdocType" : "returns",
+                                "description" : "this",
+                                "jsType" : "popup"
+                            },
+                            "description" : "Redraws popup"
+                        }
+                    },
+                    {
+                        "key" : "calcPossibleDrawingParams",
+                        "val" : {
+                            "jsdocType" : "type",
+                            "jsType" : "Function",
+                            "returns" : {
+                                "jsdocType" : "returns",
+                                "description" : "",
+                                "jsType" : "Array"
+                            },
+                            "description" : "Returns possible directions to draw with max available width and height."
+                        }
+                    },
+                    {
+                        "key" : "_calcIsTargetVisible",
+                        "val" : {
+                            "jsdocType" : "type",
+                            "jsType" : "Function",
+                            "accessLevel" : "private",
+                            "returns" : {
+                                "jsdocType" : "returns",
+                                "description" : "Whether state is visible",
+                                "jsType" : "Boolean"
+                            },
+                            "description" : "Calculates target visibility state"
+                        }
+                    }
+                ]
+            },
+            "bem" : {
+                "jsdocType" : "bem",
+                "block" : "popup",
+                "mods" : [
+                    {
+                        "jsdocType" : "bemmod",
+                        "mod" : "visible",
+                        "description" : "Represents visible state",
+                        "vals" : [
+                            {
+                                "jsdocType" : "bemval",
+                                "val" : "inited",
+                                "description" : "Represents visible state"
+                            }
+                        ]
+                    }
+                ],
+                "params" : [
+                    {
+                        "jsdocType" : "param",
+                        "name" : "mainOffset",
+                        "description" : "offset along the main direction",
+                        "jsType" : "Number",
+                        "isOptional" : true,
+                        "default" : "0"
+                    },
+                    {
+                        "jsdocType" : "param",
+                        "name" : "secondaryOffset",
+                        "description" : "offset along the secondary direction",
+                        "jsType" : "Number",
+                        "isOptional" : true,
+                        "default" : "0"
+                    },
+                    {
+                        "jsdocType" : "param",
+                        "name" : "viewportOffset",
+                        "description" : "offset from the viewport (window)",
+                        "jsType" : "Number",
+                        "isOptional" : true,
+                        "default" : "0"
+                    },
+                    {
+                        "jsdocType" : "param",
+                        "name" : "directions",
+                        "description" : "allowed directions",
+                        "jsType" : {
+                            "jsType" : "Array",
+                            "of" : "String"
+                        },
+                        "isOptional" : true
+                    }
+                ]
+            }
+        },
+        "classes" : {
+            "popup" : {
+                "jsdocType" : "class",
+                "name" : "popup",
+                "proto" : {
+                    "jsdocType" : "type",
+                    "jsType" : "Object",
+                    "props" : [
+                        {
+                            "key" : "setTarget",
+                            "val" : {
+                                "jsdocType" : "type",
+                                "jsType" : "Function",
+                                "params" : [
+                                    {
+                                        "jsdocType" : "param",
+                                        "name" : "left",
+                                        "description" : "x-coordinate or owner DOM elem or owner BEMDOM block",
+                                        "jsType" : ["Number", "jQuery", "BEMDOM"]
+                                    },
+                                    {
+                                        "jsdocType" : "param",
+                                        "name" : "top",
+                                        "description" : "y-coordinate",
+                                        "jsType" : "Number",
+                                        "isOptional" : true
+                                    }
+                                ],
+                                "returns" : {
+                                    "jsdocType" : "returns",
+                                    "description" : "this",
+                                    "jsType" : "popup"
+                                },
+                                "description" : "Sets target"
+                            }
+                        },
+                        {
+                            "key" : "setContent",
+                            "val" : {
+                                "jsdocType" : "type",
+                                "jsType" : "Function",
+                                "params" : [
+                                    {
+                                        "jsdocType" : "param",
+                                        "name" : "content",
+                                        "description" : "",
+                                        "jsType" : ["String", "jQuery"]
+                                    }
+                                ],
+                                "returns" : {
+                                    "jsdocType" : "returns",
+                                    "description" : "this",
+                                    "jsType" : "popup"
+                                },
+                                "description" : "Sets content"
+                            }
+                        },
+                        {
+                            "key" : "redraw",
+                            "val" : {
+                                "jsdocType" : "type",
+                                "jsType" : "Function",
+                                "returns" : {
+                                    "jsdocType" : "returns",
+                                    "description" : "this",
+                                    "jsType" : "popup"
+                                },
+                                "description" : "Redraws popup"
+                            }
+                        },
+                        {
+                            "key" : "calcPossibleDrawingParams",
+                            "val" : {
+                                "jsdocType" : "type",
+                                "jsType" : "Function",
+                                "returns" : {
+                                    "jsdocType" : "returns",
+                                    "description" : "",
+                                    "jsType" : "Array"
+                                },
+                                "description" : "Returns possible directions to draw with max available width and height."
+                            }
+                        },
+                        {
+                            "key" : "_calcIsTargetVisible",
+                            "val" : {
+                                "jsdocType" : "type",
+                                "jsType" : "Function",
+                                "accessLevel" : "private",
+                                "returns" : {
+                                    "jsdocType" : "returns",
+                                    "description" : "Whether state is visible",
+                                    "jsType" : "Boolean"
+                                },
+                                "description" : "Calculates target visibility state"
+                            }
+                        }
+                    ]
+                },
+                "bem" : {
+                    "jsdocType" : "bem",
+                    "block" : "popup",
+                    "mods" : [
+                        {
+                            "jsdocType" : "bemmod",
+                            "mod" : "visible",
+                            "description" : "Represents visible state",
+                            "vals" : [
+                                {
+                                    "jsdocType" : "bemval",
+                                    "val" : "inited",
+                                    "description" : "Represents visible state"
+                                }
+                            ]
+                        }
+                    ],
+                    "params" : [
+                        {
+                            "jsdocType" : "param",
+                            "name" : "mainOffset",
+                            "description" : "offset along the main direction",
+                            "jsType" : "Number",
+                            "isOptional" : true,
+                            "default" : "0"
+                        },
+                        {
+                            "jsdocType" : "param",
+                            "name" : "secondaryOffset",
+                            "description" : "offset along the secondary direction",
+                            "jsType" : "Number",
+                            "isOptional" : true,
+                            "default" : "0"
+                        },
+                        {
+                            "jsdocType" : "param",
+                            "name" : "viewportOffset",
+                            "description" : "offset from the viewport (window)",
+                            "jsType" : "Number",
+                            "isOptional" : true,
+                            "default" : "0"
+                        },
+                        {
+                            "jsdocType" : "param",
+                            "name" : "directions",
+                            "description" : "allowed directions",
+                            "jsType" : {
+                                "jsType" : "Array",
+                                "of" : "String"
+                            },
+                            "isOptional" : true
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]}
