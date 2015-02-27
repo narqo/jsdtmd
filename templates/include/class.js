@@ -28,7 +28,7 @@ match(this.jsdocType === 'class')(function() {
     if(clsAugments) {
         res += apply({
             block : 'para',
-            content : 'Aughtments ' + apply('jstype-type', clsAugments)
+            content : 'Augments ' + apply('jstype-type', clsAugments)
         });
     }
 
